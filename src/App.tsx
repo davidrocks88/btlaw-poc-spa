@@ -7,31 +7,57 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import { IOrganization, Organization } from './Organization';
+import { IOrganization, Organization, useOrganizations } from './Organization';
+import { Tag } from './Tag';
 
 export function Temp() {
   return <p>Temp</p>
 }
 
 export function Home() {
-  const [organizations, setOrganizations] = useState<IOrganization[]>([])
+  const { data: organizations } = useOrganizations()
+  const [filters, setFilters] = useState<any>({})
 
-  useEffect(() => {
-    fetch('https://us-central1-btlaw-probono-poc.cloudfunctions.net/getOrganizations')
-    .then(res =>res.json())
-    .then(json => setOrganizations(json))
-  }, [])
+  function updateFilter(name: string, shouldFilter: Boolean) {
+    console.log({ name, shouldFilter })
+    setFilters({
+      ...filters,
+      [name]: shouldFilter
+    })
+  }
+  const currentFilters = Object.keys(filters)
+  let areAllFalse = true
 
-  
+  for (let filterVal of Object.values(filters)) {
+    areAllFalse = areAllFalse && filterVal === false
+  }
+
+  let orgsToShow = organizations
+
+  if (Object.keys(filters).length > 0 && areAllFalse === false) {
+    orgsToShow = orgsToShow?.filter(org => {
+      for (let tag of org.tags) {
+        if (filters[tag] === true) {
+          return true
+        }
+      }
+      return false
+    })
+  }
+
+  console.log(filters)
+  console.log(orgsToShow)
+
   return (
     <div>
       <h1>Home</h1>
-      <nav>
+      {/* <nav>
         <Link to="/">Home</Link> |{" "}
         <Link to="about">About</Link>
-      </nav>
-
-      {organizations.map(org => <Organization organization={org} />)}
+      </nav> */}
+      <div className='font-lg mb-4 font-bold'>Filters</div>
+      {organizations?.map(org => org.tags.map(t => <Tag name={t} filter={updateFilter} />))}
+      {orgsToShow?.map(org => <Organization organization={org} />)}
 
     </div>
   );

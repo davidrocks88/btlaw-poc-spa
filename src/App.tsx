@@ -21,8 +21,7 @@ export function Home() {
     .then(res =>res.json())
     .then(json => setOrganizations(json))
   }, [])
-  
-  console.log(organizations)
+
   
   return (
     <div>

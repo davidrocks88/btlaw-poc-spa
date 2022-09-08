@@ -13,10 +13,10 @@ export interface OrganizationProps {
 
 export function Organization({organization}: OrganizationProps) {
   return (
-  <div className="font-bold">
+  <div className="border-stone-900 border-2 w-60 m-4 p-4">
     <h1>name: {organization.name}</h1>
-    <h2>description: {organization.description}</h2>
-    <h2>tags: {organization.tags}</h2>
+    <h2 className=" mb-2">description: {organization.description}</h2>
+    {organization.tags.map(t=><Tag name={t} />)}
   </div>
   )
 }

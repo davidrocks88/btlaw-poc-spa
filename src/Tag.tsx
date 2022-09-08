@@ -2,15 +2,15 @@ import { useState } from "react"
 
 export interface TagProps {
   name: string
-  filter: (name: string, isFiltered: Boolean) => void
+  handleClick: (name: string, value: Boolean) => void
 }
 
-export function Tag({ name, filter }: TagProps) {
+export function Tag({ name, handleClick }: TagProps) {
   const [isFiltered, setIsFiltered] = useState<Boolean>(true)
 
   function click() {
     setIsFiltered(!isFiltered)
-    filter(name, isFiltered)
+    handleClick(name, isFiltered)
   }
 
   return (

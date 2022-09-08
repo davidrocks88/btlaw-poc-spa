@@ -5,7 +5,6 @@ import {
 } from '@tanstack/react-query'
 
 export interface IOrganization {
-  id: string
   name: string
   description: string
   tags: string[]
@@ -25,10 +24,12 @@ export function useOrganizations() {
 
 export function Organization({ organization }: OrganizationProps) {
   return (
-    <div className="border-stone-900 border-2 w-60 m-4 p-4">
-      <h1>name: {organization.name}</h1>
-      <h2 className=" mb-2">description: {organization.description}</h2>
-      {organization.tags.map(t => <Tag name={t} filter={(a: string) => { }} />)}
+    <div className="border-stone-900 border-2 w-96 m-4 p-4 flex flex-col">
+      <div className="text-lg font-medium">{organization.name}</div>
+      <div className="text-md font-normal italic mb-2">{organization.description}</div>
+      <div className="flex flex-row flex-wrap">
+        {organization.tags.map(t => <div className="flex"><Tag name={t} handleClick={(a: string) => { }} /></div>)}
+      </div>
     </div>
   )
 }

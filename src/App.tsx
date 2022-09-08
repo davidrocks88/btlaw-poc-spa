@@ -1,14 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Link
-} from "react-router-dom";
-import { IOrganization, Organization, useOrganizations } from './Organization';
+import { Organization, useOrganizations } from './Organization';
 import { Tag } from './Tag';
+import { Link } from 'react-router-dom';
 
 export function Temp() {
   return <p>Temp</p>
@@ -25,7 +20,6 @@ export function Home() {
       [name]: shouldFilter
     })
   }
-  const currentFilters = Object.keys(filters)
   let areAllFalse = true
 
   for (let filterVal of Object.values(filters)) {
@@ -45,18 +39,15 @@ export function Home() {
     })
   }
 
-  console.log(filters)
-  console.log(orgsToShow)
-
   return (
     <div>
-      <h1>Home</h1>
-      {/* <nav>
-        <Link to="/">Home</Link> |{" "}
-        <Link to="about">About</Link>
-      </nav> */}
-      <div className='font-lg mb-4 font-bold'>Filters</div>
-      {organizations?.map(org => org.tags.map(t => <Tag name={t} filter={updateFilter} />))}
+      <div className='text-xl font-semibold'>BT Pro Bono Proof of Concept</div>
+      <nav>
+        <Link to="newOrg"><button className='p-2 m-2 border-2 border-black-100'>Create new Org</button></Link>
+      </nav>
+      <hr />
+      <div className='font-lg my-4 font-bold'>Filters</div>
+      {organizations?.map(org => org.tags.map(t => <Tag name={t} handleClick={updateFilter} />))}
       {orgsToShow?.map(org => <Organization organization={org} />)}
 
     </div>

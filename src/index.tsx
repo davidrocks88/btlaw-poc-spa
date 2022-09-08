@@ -14,6 +14,7 @@ import {
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query'
+import { NewOrg } from './NewOrg';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -24,12 +25,16 @@ root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-        <Routes>
-          <Route path="/">
-            <Route index element={<Home />} />
-            <Route path="temp" element={<Temp />} />
-          </Route>
-        </Routes>
+        <div className='m-4'>
+          <Routes>
+            <Route path="/">
+              <Route index element={<Home />} />
+              <Route path="temp" element={<Temp />} />
+              <Route path="newOrg" element={<NewOrg />} />
+
+            </Route>
+          </Routes>
+        </div>
       </BrowserRouter>
     </QueryClientProvider>
   </React.StrictMode>

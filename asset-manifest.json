@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/btlaw-poc-spa/static/css/main.073c9b0a.css",
+    "main.js": "/btlaw-poc-spa/static/js/main.a400260f.js",
+    "static/js/787.30fe7b82.chunk.js": "/btlaw-poc-spa/static/js/787.30fe7b82.chunk.js",
+    "static/media/logo.svg": "/btlaw-poc-spa/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/btlaw-poc-spa/index.html",
+    "main.073c9b0a.css.map": "/btlaw-poc-spa/static/css/main.073c9b0a.css.map",
+    "main.a400260f.js.map": "/btlaw-poc-spa/static/js/main.a400260f.js.map",
+    "787.30fe7b82.chunk.js.map": "/btlaw-poc-spa/static/js/787.30fe7b82.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.073c9b0a.css",
+    "static/js/main.a400260f.js"
+  ]
+}

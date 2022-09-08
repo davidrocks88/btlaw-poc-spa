@@ -1,8 +1,31 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Link
+} from "react-router-dom";
 
-function App() {
+export function Temp() {
+  return <p>Temp</p>
+}
+
+export function Home() {
+  return (
+    <div>
+      <h1>Home</h1>
+      <nav>
+        <Link to="/">Home</Link> |{" "}
+        <Link to="about">About</Link>
+      </nav>
+    </div>
+  );
+}
+
+
+export function App() {
   return (
     <div className="App">
       <header className="App-header">

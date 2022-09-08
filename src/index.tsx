@@ -21,12 +21,6 @@ root.render(
       <Route path="/">
       <Route index element={<Home />} />
       <Route path="temp" element={<Temp />} />
-        
-        {/* <Route path="teams" element={<Teams />}>
-          <Route path=":teamId" element={<Team />} />
-          <Route path="new" element={<NewTeamForm />} />
-          <Route index element={<LeagueStandings />} />
-        </Route> */}
       </Route>
     </Routes>
   </BrowserRouter>  </React.StrictMode>

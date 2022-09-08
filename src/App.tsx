@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import {
@@ -7,12 +7,23 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import { IOrganization, Organization } from './Organization';
 
 export function Temp() {
   return <p>Temp</p>
 }
 
 export function Home() {
+  const [organizations, setOrganizations] = useState<IOrganization[]>([])
+
+  useEffect(() => {
+    fetch('https://us-central1-btlaw-probono-poc.cloudfunctions.net/getOrganizations')
+    .then(res =>res.json())
+    .then(json => setOrganizations(json))
+  }, [])
+  
+  console.log(organizations)
+  
   return (
     <div>
       <h1>Home</h1>
@@ -20,6 +31,9 @@ export function Home() {
         <Link to="/">Home</Link> |{" "}
         <Link to="about">About</Link>
       </nav>
+
+      {organizations.map(org => <Organization organization={org} />)}
+
     </div>
   );
 }

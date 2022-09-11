@@ -39,6 +39,8 @@ export function Home() {
     })
   }
 
+  let tags = organizations?.map(o => o.tags).flat().sort((t1, t2) => t1.trim().toLocaleLowerCase().localeCompare(t2.trim().toLocaleLowerCase())).filter((v, i, a) => a.indexOf(v) === i)
+
   return (
     <div>
       <div className='text-xl font-semibold'>BT Pro Bono Proof of Concept</div>
@@ -46,9 +48,38 @@ export function Home() {
         <Link to="newOrg"><button className='p-2 m-2 border-2 border-black-100'>Create new Org</button></Link>
       </nav>
       <hr />
-      <div className='font-lg my-4 font-bold'>Filters</div>
-      {organizations?.map(org => org.tags.map(t => <Tag name={t} handleClick={updateFilter} />))}
-      {orgsToShow?.map(org => <Organization organization={org} />)}
+      <div className='flex flex-row align-middle items-center'>
+        <div className='font-lg my-4 font-bold'>Filters</div>
+        <div className='ml-4 border-2 rounded-full p-2 font-lg my-4 font-bold' onClick={() => setFilters({})}>Reset filters</div>
+      </div>
+      <div className='flex flex-row flex-wrap gap-y-2'>
+        {tags?.map(t => <div className='mb-3'><Tag name={t} handleClick={updateFilter} /></div>)}
+      </div>
+
+      <div className='flex flex-row flex-wrap'>
+        {orgsToShow?.map(org => <Organization organization={org} />)}
+      </div>
+
+      {/* <table className='table-auto border-2 mt-6'>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>tags</th>
+        </tr>
+        {orgsToShow?.map(org => <tr className='border-2'>
+          <td>
+            {org.name}
+          </td>
+          <td>
+            {org.description}
+          </td>
+          <td>
+            <div className="flex flex-row flex-wrap">
+              {org.tags.map(t => <div className="flex"><Tag name={t} handleClick={(a: string) => { }} /></div>)}
+            </div>
+          </td>
+        </tr>)}
+      </table> */}
 
     </div>
   );

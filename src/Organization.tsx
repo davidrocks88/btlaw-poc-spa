@@ -1,12 +1,14 @@
-import { Tag } from "./Tag"
 import {
   useQuery
-
 } from '@tanstack/react-query'
 
 export interface IOrganization {
   name: string
   description: string
+  btContactName?: string
+  btContactEmail?: string
+  volunteerEmail?: string
+  orgUrl?: string
   tags: string[]
 }
 
@@ -22,14 +24,24 @@ export function useOrganizations() {
   })
 }
 
+
 export function Organization({ organization }: OrganizationProps) {
   return (
-    <div className="border-stone-900 border-2 w-96 m-4 p-4 flex flex-col">
-      <div className="text-lg font-medium">{organization.name}</div>
-      <div className="text-md font-normal italic mb-2">{organization.description}</div>
+    <div className="w-96 m-4 p-4 flex flex-col rounded overflow-hidden shadow-lg">
+      <a href={`https://${organization.orgUrl}`} target='_blank' rel="noreferrer"><div className="font-bold text-xl mb-2 hover:underline">{organization.name}</div></a>
       <div className="flex flex-row flex-wrap">
-        {organization.tags.map(t => <div className="flex"><Tag name={t} handleClick={(a: string) => { }} /></div>)}
+        {organization.tags.map(t => <div className="flex"><div className={`text-sm p-1 px-2 m-1 border-2 rounded-full inline-block bg-gray-200`}>{t}</div>
+        </div>)}
       </div>
+      <div className="text-gray-700 text-base mb-2">{organization.description}</div>
+      <div className="grow"></div>
+      <div className="flex flex-row">
+        <div className="grow"></div>
+        <a href={`mailto:${organization.volunteerEmail}`} target="_blank" rel="noreferrer"><button className="w-42 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+          Volunteer Now
+        </button></a>
+      </div>
+
     </div>
   )
 }

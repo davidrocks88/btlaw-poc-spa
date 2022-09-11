@@ -15,7 +15,7 @@ export function NewOrg() {
     fetch('https://us-central1-btlaw-probono-poc.cloudfunctions.net/getOrganizations', {
       method: 'POST',
       body: JSON.stringify({
-        name, description, tags: tags.split(',')
+        name, description, tags: tags.split(',').map(t => t.trim())
       }),
       mode: 'no-cors',
       headers: new Headers({ 'content-type': 'application/json' }),

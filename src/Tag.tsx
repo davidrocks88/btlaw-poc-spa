@@ -1,22 +1,15 @@
-import { useState } from "react"
-
 export interface TagProps {
   name: string
   handleClick: (name: string, value: Boolean) => void
+  filters?: any
 }
 
-export function Tag({ name, handleClick }: TagProps) {
-  const [isFiltered, setIsFiltered] = useState<Boolean>(false)
-
+export function Tag({ name, handleClick, filters }: TagProps) {
   function click() {
-    console.log(`Setting tag=${name}, isFiltered from ${isFiltered} to ${!isFiltered}`)
-    setIsFiltered(!isFiltered)
-    handleClick(name, isFiltered)
+    handleClick(name, !filters[name])
   }
 
-  const shouldHighlight = isFiltered
-
   return (
-    <div className={`text-sm p-1 px-2 m-1 rounded-full inline-block hover:bg-gray-100 ${shouldHighlight ? 'bg-gray-200' : ''}`} onClick={click}>{name}</div>
+    <div className={`cursor-pointer text-sm p-1 px-2 m-1 rounded-full inline hover:bg-gray-100 ${filters[name] ? 'bg-gray-200' : ''}`} onClick={click}>{name}</div>
   )
 }

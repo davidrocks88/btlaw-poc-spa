@@ -33,7 +33,7 @@ export function Organization({ organization }: OrganizationProps) {
         {organization.tags.map(t => <div className="flex"><div className={`text-sm p-1 px-2 m-1 border-2 rounded-full inline-block bg-gray-200`}>{t}</div>
         </div>)}
       </div>
-      <div className="text-gray-700 text-base mb-2">{organization.description}</div>
+      <div className="text-gray-700 text-base mb-2 overflow-hidden text-ellipsis">{organization.description}</div>
       <div className="grow"></div>
       <div className="flex flex-row">
         <div className="grow"></div>

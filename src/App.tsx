@@ -9,6 +9,10 @@ export function Temp() {
   return <p>Temp</p>
 }
 
+interface IFiltersState {
+  [tag: string]: boolean
+}
+
 export function Home() {
   const { data: organizations } = useOrganizations()
   const [filters, setFilters] = useState<any>({})
@@ -43,18 +47,12 @@ export function Home() {
 
   return (
     <div>
-      <div className='text-xl font-semibold'>BT Pro Bono Proof of Concept</div>
-      <nav>
-        <Link to="newOrg"><button className='p-2 m-2 border-2 border-black-100'>Create new Org</button></Link>
-      </nav>
+      <div className='mt-2 flex flex-row flex-wrap gap-y-2 items-end align-middle content-center'>
+        <div className='cursor-pointer border-2 hover:bg-gray-100 border-white rounded-full p-2 font-lg font-bold' onClick={() => setFilters({})}>Reset</div>
+
+        {tags?.map(t => <div className='mb-3'><Tag filters={filters} name={t} handleClick={updateFilter} /></div>)}
+      </div>
       <hr />
-      <div className='flex flex-row align-middle items-center'>
-        <div className='font-lg my-4 font-bold'>Filters</div>
-        <div className='ml-4 border-2 rounded-full p-2 font-lg my-4 font-bold' onClick={() => setFilters({})}>Reset filters</div>
-      </div>
-      <div className='flex flex-row flex-wrap gap-y-2'>
-        {tags?.map(t => <div className='mb-3'><Tag name={t} handleClick={updateFilter} /></div>)}
-      </div>
 
       <div className='flex flex-row flex-wrap'>
         {orgsToShow?.map(org => <Organization organization={org} />)}

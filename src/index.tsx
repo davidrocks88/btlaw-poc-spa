@@ -28,7 +28,9 @@ root.render(
         <div className=''>
           <nav className="flex items-center justify-between flex-wrap bg-[#131829] p-6">
             <div className="flex items-center flex-shrink-0 text-white mr-6">
-              <img className='h-8' src='https://btlaw.com/-/media/images/btlaw/site-logo/btlawlogo.ashx?h=69&w=411&la=en&hash=C3C4E5F6805DC4719AF72237AD0B82E1' />
+              <a href='https://btlaw.com' target='_blank' rel="noreferrer">
+                <img className='h-8' src='https://btlaw.com/-/media/images/btlaw/site-logo/btlawlogo.ashx?h=69&w=411&la=en&hash=C3C4E5F6805DC4719AF72237AD0B82E1' />
+              </a>
               <span className="ml-2 font-semibold text-xl tracking-tight">Pro Bono HQ</span>
             </div>
             <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">

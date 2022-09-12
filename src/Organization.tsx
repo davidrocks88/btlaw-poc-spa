@@ -27,10 +27,10 @@ export function useOrganizations() {
 
 export function Organization({ organization }: OrganizationProps) {
   return (
-    <div className="w-96 m-4 p-4 flex flex-col rounded overflow-hidden shadow-lg">
+    <div className="w-96 m-4 p-4 flex flex-col rounded overflow-hidden shadow-lg" key={organization.name}>
       <a href={`https://${organization.orgUrl}`} target='_blank' rel="noreferrer"><div className="font-bold text-xl mb-2 hover:underline">{organization.name}</div></a>
       <div className="flex flex-row flex-wrap">
-        {organization.tags.map(t => <div className="flex"><div className={`text-sm p-1 px-2 m-1 border-2 rounded-full inline-block bg-gray-200`}>{t}</div>
+        {organization.tags.map(t => <div key={t} className="flex"><div className={`text-sm p-1 px-2 m-1 border-2 rounded-full inline-block bg-gray-200`}>{t}</div>
         </div>)}
       </div>
       <div className="text-gray-700 text-base mb-2 overflow-hidden text-ellipsis">{organization.description}</div>

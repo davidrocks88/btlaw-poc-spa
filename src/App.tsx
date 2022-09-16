@@ -47,8 +47,8 @@ export function Home() {
 
   return (
     <div>
-      <div className='p-2 bg-gray-200'>
-        <p className='w-1/2'>{'Welcome to the B&T pro bono programs explorer. All of the firm’s approved prams are listed. To find just programs that might interest you, click on the areas of interest below. For each one you select the pro bono programs that offer projects in that area will show as cards. Each card has the program description (the name of the program is a link to its website), a description of the organization, links to find current opportunities, and a button to email the organization to let them know you are interested in volunteering. Click Reset to clear the areas of interest. You can also search by using the search window.'}
+      <div className='p-2 bg-gray-200 m-1 border'>
+        <p className='w-1/2'>{'Welcome to the B&T pro bono programs explorer. All of the firm’s approved programs are listed. To find just programs that might interest you, click on the areas of interest below. For each one you select the pro bono programs that offer projects in that area will show as cards. Each card has the program description (the name of the program is a link to its website), a description of the organization, links to find current opportunities, and a button to email the organization to let them know you are interested in volunteering. Click Reset to clear the areas of interest. You can also search by using the search window.'}
         </p>
       </div>
       <div className='mt-1 flex flex-row flex-wrap gap-y-2 items-end align-middle content-center'>

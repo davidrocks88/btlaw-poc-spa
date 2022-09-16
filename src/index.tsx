@@ -31,7 +31,7 @@ root.render(
               <a href='https://btlaw.com' target='_blank' rel="noreferrer">
                 <img className='h-8' src='https://btlaw.com/-/media/images/btlaw/site-logo/btlawlogo.ashx?h=69&w=411&la=en&hash=C3C4E5F6805DC4719AF72237AD0B82E1' />
               </a>
-              <span className="ml-2 font-semibold text-xl tracking-tight">Pro Bono HQ</span>
+              <span className="ml-4 font-semibold text-xl tracking-tight">Pro Bono HQ</span>
             </div>
             <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
               <div className="text-sm lg:flex-grow">

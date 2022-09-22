@@ -79,7 +79,7 @@ export default function OrganizationModal({ organization, hideModal }: Organizat
                       <div className='flex justify-between'>
                         <a href={`https://${organization.orgUrl}`} target='_blank' rel="noreferrer"><div className="font-semibold text-xl mb-2 underline hover:text-blue-600">{organization.name}</div></a>
                         <code
-                          className="text-sm hover:font-bold"
+                          className="text-sm hover:font-bold cursor-pointer"
                           onClick={() => setOpen(false)}
                           ref={cancelButtonRef}
                         >
@@ -90,9 +90,8 @@ export default function OrganizationModal({ organization, hideModal }: Organizat
                         <p className="text-sm text-gray-500">
                           {organization.description}
                         </p>
-                        <Accordion title="Training Information" content={`Something about traning information for ${organization.name}`} />
+                        <Accordion title="Training Information" content={organization.trainingInformation ?? `Something about traning information for ${organization.name}`} />
                         <Accordion title="Areas Served" content={`List of areas served for ${organization.name}`} />
-                        <Accordion title="Reviews" content={<Review content={`Some review of ${organization.name}`} />} />
                         <Accordion title="Contact Information" content={<>
                           <a target="_blank" href={`mailto://${organization.btContactEmail}`} rel="noreferrer"><div>{"B&T Contact Information: " + organization.btContactName}</div></a>
                           <a target="_blank" href={`mailto://${organization.orgUrl}`} rel="noreferrer"><div>{organization.name + " Contact Information: "}</div></a>

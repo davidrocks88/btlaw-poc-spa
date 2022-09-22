@@ -4,10 +4,6 @@ import './App.css';
 import { Organization, useOrganizations } from './Organization';
 import { Tag } from './Tag';
 
-export function Temp() {
-  return <p>Temp</p>
-}
-
 export function Home() {
   const { data: organizations } = useOrganizations()
   const [filters, setFilters] = useState<any>({})
@@ -67,28 +63,6 @@ export function Home() {
       <div className='flex flex-row flex-wrap'>
         {orgsToShow?.map(org => <Organization organization={org} />)}
       </div>
-
-      {/* <table className='table-auto border-2 mt-6'>
-        <tr>
-          <th>Name</th>
-          <th>Description</th>
-          <th>tags</th>
-        </tr>
-        {orgsToShow?.map(org => <tr className='border-2'>
-          <td>
-            {org.name}
-          </td>
-          <td>
-            {org.description}
-          </td>
-          <td>
-            <div className="flex flex-row flex-wrap">
-              {org.tags.map(t => <div className="flex"><Tag name={t} handleClick={(a: string) => { }} /></div>)}
-            </div>
-          </td>
-        </tr>)}
-      </table> */}
-
     </div>
   );
 }

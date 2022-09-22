@@ -1,12 +1,20 @@
 import { useState } from "react";
 import { useOrganizations } from "./Organization";
-import { Tag } from "./Tag";
 import { useNavigate } from "react-router-dom";
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import _ from "lodash";
 
 export function NewOrg() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
+  const [trainingInformation, setTrainingInformation] = useState("");
   const [tags, setTags] = useState("");
+  const [btContactName, setbtContactName] = useState("")
+  const [btContactEmail, setbtContactEmail] = useState("")
+  const [volunteerContactName, setvolunteerContactName] = useState("")
+  const [volunteerContactPhone, setvolunteerContactPhone] = useState("")
+  const [volunteerContactEmail, setvolunteerContactEmail] = useState("")
   let navigate = useNavigate();
 
   const handleSubmit = (event: any) => {
@@ -15,7 +23,7 @@ export function NewOrg() {
     fetch('https://us-central1-btlaw-probono-poc.cloudfunctions.net/getOrganizations', {
       method: 'POST',
       body: JSON.stringify({
-        name, description, tags: tags.split(',').map(t => t.trim())
+        name, description, trainingInformation, tags: tags.split(',').map(t => t.trim())
       }),
       mode: 'no-cors',
       headers: new Headers({ 'content-type': 'application/json' }),
@@ -23,7 +31,7 @@ export function NewOrg() {
   }
 
   const { data: organizations } = useOrganizations()
-  const allTags = organizations?.map(o => o.tags).flat()
+  const allTags: string[] = _.uniq(organizations?.map(o => o.tags).flat().map(t => _.startCase(t)))
 
   function handleFilter(tagName: string, _: Boolean) {
     if (tags.trim().length === 0) {
@@ -43,18 +51,21 @@ export function NewOrg() {
     setTags(currentTags.join(','))
   }
 
+  const redStar = <div className="inline text-red-500">*</div>
+
   return (
     <form onSubmit={handleSubmit}>
       <div className="flex flex-col m-6">
-        <label className="block text-gray-700 text-sm font-bold mb-2">Org Name:
+        <label className="block text-gray-700 text-sm font-bold mb-2">Org Name{redStar}
           <input
             className="w-64 bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            required
           />
         </label>
-        <label className="block text-gray-700 text-sm font-bold mb-2">Description:
+        <label className="block text-gray-700 text-sm font-bold mb-2">Description{redStar}
           <input
             className="w-[64em] bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"
             type="textarea"
@@ -62,25 +73,87 @@ export function NewOrg() {
             onChange={(e) => setDescription(e.target.value)}
           />
         </label>
-        <label className="block text-gray-700 text-sm font-bold mb-2">Tags, comma separated:
+        <label className="block text-gray-700 text-sm font-bold mb-2">Training Information
+          <input
+            className="w-[64em] bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"
+            type="textarea"
+            value={trainingInformation}
+            onChange={(e) => setTrainingInformation(e.target.value)}
+          />
+        </label>
+
+        <div className="text-lg">{`B&T Contact`}</div>
+
+        <label className="block text-gray-700 text-sm font-bold mb-2">{'B&T Contact Name'}
           <input
             className="w-64 bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"
+            type="text"
+            value={btContactName}
+            onChange={(e) => setbtContactName(e.target.value)}
+          />
+        </label>
+
+        <label className="block text-gray-700 text-sm font-bold mb-2">{'B&T Contact Email'}
+          <input
+            className="w-64 bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"
+            type="text"
+            value={btContactEmail}
+            onChange={(e) => setbtContactEmail(e.target.value)}
+          />
+        </label>
+
+        <div className="text-lg">{`Program Contact`}</div>
+
+        <label className="block text-gray-700 text-sm font-bold mb-2">{'Program Contact Name'}
+          <input
+            className="w-64 bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"
+            type="text"
+            value={volunteerContactName}
+            onChange={(e) => setvolunteerContactName(e.target.value)}
+          />
+        </label>
+
+        <label className="block text-gray-700 text-sm font-bold mb-2">{'Program Contact Email'}
+          <input
+            className="w-64 bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"
+            type="text"
+            value={volunteerContactEmail}
+            onChange={(e) => setvolunteerContactEmail(e.target.value)}
+          />
+        </label>
+
+        <label className="block text-gray-700 text-sm font-bold mb-2">{'Program Contact Phone'}
+          <input
+            className="w-64 bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"
+            type="text"
+            value={volunteerContactPhone}
+            onChange={(e) => setvolunteerContactPhone(e.target.value)}
+          />
+        </label>
+        <hr className='my-4' />
+        <label className="block text-gray-700 text-sm font-bold mb-2">Tags, comma separated:
+          <input
+            className="min-w-64 bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"
             type="text"
             value={tags}
             onChange={(e) => setTags(e.target.value)}
           />
         </label>
-        <div className="flex flex-row">
-          {allTags?.map(t => <div className="flex"><Tag name={t} handleClick={handleFilter} /></div>)}
+
+
+
+        <div className="flex flex-row my-2">
+          {allTags?.map(t => <div key={t} className="flex"><div className={`cursor-pointer text-sm p-1 px-2 m-1 rounded-full inline hover:bg-gray-100 bg-gray-200`} onClick={() => handleFilter(t, true)}>{t}</div></div>)}
         </div>
+
         <div className="flex flex-row gap-2">
           <a href='/'>
-            <div className='flex justify-center align-middle flex-a w-32 h-8 rounded bg-red-100 hover:bg-white border-2 border-red-400 hover:border-red-300'>
+            <div className='text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800'>
               Go Back
             </div>
           </a>
 
-          <input className='w-32 h-8 rounded bg-green-300 hover:bg-green-200 border-2 border-green-400 hover:border-green-300' type="submit" />
+          <input className='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800' type="submit" />
         </div>
 
       </div>

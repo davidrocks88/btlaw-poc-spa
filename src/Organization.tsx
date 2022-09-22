@@ -9,9 +9,12 @@ export interface IOrganization {
   description: string
   btContactName?: string
   btContactEmail?: string
-  volunteerEmail?: string
+  volunteerContactName?: string
+  volunteerContactEmail?: string
+  volunteerContactPhone?: string
   orgUrl?: string
   tags: string[]
+  trainingInformation?: string
 }
 
 export interface OrganizationProps {
@@ -41,8 +44,8 @@ export function Organization({ organization }: OrganizationProps) {
 
   return (
     <div className="w-96 m-4 p-4 flex flex-col rounded overflow-hidden shadow-lg" key={organization.name}>
-      <div className='flex justify-between'>
-        <a href={`https://${organization.orgUrl}`} target='_blank' rel="noreferrer"><div className="font-semibold text-xl mb-2 underline hover:font-bold">{organization.name}</div></a>
+      <div className='flex justify-between cursor-pointer'>
+        <div className="font-semibold text-xl mb-2 underline hover:font-bold cursor-default"><a href={`https://${organization.orgUrl}`} target='_blank' rel="noreferrer">{organization.name}</a></div>
         <svg onClick={() => setshowModal(true)} className="h-4" height="32" id="expand" viewBox="0 0 32 32" width="32" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d=" M16 4 L28 4 L28 16 L24 12 L20 16 L16 12 L20 8z M4 16 L8 20 L12 16 L16 20 L12 24 L16 28 L4 28z " /></svg>
       </div>
       <div className="flex flex-row flex-wrap">
@@ -54,7 +57,7 @@ export function Organization({ organization }: OrganizationProps) {
       <div className="grow"></div>
       <div className="flex flex-row">
         <div className="grow"></div>
-        <a href={`mailto:${organization.volunteerEmail}`} target="_blank" rel="noreferrer"><button className="w-42 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        <a href={`mailto:${organization.volunteerContactEmail}`} target="_blank" rel="noreferrer"><button className="w-42 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
           Volunteer Now
         </button></a>
       </div>

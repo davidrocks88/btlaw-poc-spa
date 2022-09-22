@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App, { Home, Temp } from './App';
+import { Home } from './App';
 import reportWebVitals from './reportWebVitals';
 import {
   BrowserRouter,
@@ -46,7 +46,6 @@ root.render(
           <Routes>
             <Route path="/">
               <Route index element={<Home />} />
-              <Route path="temp" element={<Temp />} />
               <Route path="newOrg" element={<NewOrg />} />
 
             </Route>

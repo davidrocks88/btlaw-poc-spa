@@ -15,6 +15,7 @@ export interface IOrganization {
   orgUrl?: string
   tags: string[]
   trainingInformation?: string
+  areasServed?: string
 }
 
 export interface OrganizationProps {

@@ -16,6 +16,7 @@ export function NewOrg() {
   const [volunteerContactName, setvolunteerContactName] = useState("")
   const [volunteerContactPhone, setvolunteerContactPhone] = useState("")
   const [volunteerContactEmail, setvolunteerContactEmail] = useState("")
+  const [areasServed, setAreasServed] = useState("")
   let navigate = useNavigate();
 
   const handleSubmit = (event: any) => {
@@ -24,7 +25,17 @@ export function NewOrg() {
     fetch('https://us-central1-btlaw-probono-poc.cloudfunctions.net/getOrganizations', {
       method: 'POST',
       body: JSON.stringify({
-        name, orgUrl, description, trainingInformation, btContactName, btContactEmail, volunteerContactName, volunteerContactEmail, volunteerContactPhone, tags: tags.split(',').map(t => t.trim())
+        name,
+        orgUrl,
+        description,
+        trainingInformation,
+        btContactName,
+        btContactEmail,
+        volunteerContactName,
+        volunteerContactEmail,
+        volunteerContactPhone,
+        areasServed,
+        tags: tags.split(',').map(t => t.trim())
       }),
       mode: 'no-cors',
       headers: new Headers({ 'content-type': 'application/json' }),
@@ -91,6 +102,14 @@ export function NewOrg() {
             type="textarea"
             value={trainingInformation}
             onChange={(e) => setTrainingInformation(e.target.value)}
+          />
+        </label>
+        <label className="block text-gray-700 text-sm font-bold mb-2">Areas Served
+          <input
+            className="w-[64em] bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"
+            type="textarea"
+            value={areasServed}
+            onChange={(e) => setAreasServed(e.target.value)}
           />
         </label>
         <hr className='my-4' />

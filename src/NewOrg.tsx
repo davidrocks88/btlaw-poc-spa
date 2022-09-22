@@ -7,6 +7,7 @@ import _ from "lodash";
 
 export function NewOrg() {
   const [name, setName] = useState("");
+  const [orgUrl, setOrgUrl] = useState("");
   const [description, setDescription] = useState("");
   const [trainingInformation, setTrainingInformation] = useState("");
   const [tags, setTags] = useState("");
@@ -23,7 +24,7 @@ export function NewOrg() {
     fetch('https://us-central1-btlaw-probono-poc.cloudfunctions.net/getOrganizations', {
       method: 'POST',
       body: JSON.stringify({
-        name, description, trainingInformation, tags: tags.split(',').map(t => t.trim())
+        name, orgUrl, description, trainingInformation, btContactName, btContactEmail, volunteerContactName, volunteerContactEmail, volunteerContactPhone, tags: tags.split(',').map(t => t.trim())
       }),
       mode: 'no-cors',
       headers: new Headers({ 'content-type': 'application/json' }),
@@ -56,15 +57,26 @@ export function NewOrg() {
   return (
     <form onSubmit={handleSubmit}>
       <div className="flex flex-col m-6">
-        <label className="block text-gray-700 text-sm font-bold mb-2">Org Name{redStar}
-          <input
-            className="w-64 bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-        </label>
+        <div className='flex flex-row gap-6'>
+          <label className="block text-gray-700 text-sm font-bold mb-2">Org Name{redStar}
+            <input
+              className="w-64 bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+          </label>
+          <label className="block text-gray-700 text-sm font-bold mb-2">Org URL
+            <input
+              className="w-64 bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"
+              type="text"
+              value={orgUrl}
+              onChange={(e) => setOrgUrl(e.target.value)}
+              required
+            />
+          </label>
+        </div>
         <label className="block text-gray-700 text-sm font-bold mb-2">Description{redStar}
           <input
             className="w-[64em] bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"
@@ -81,55 +93,62 @@ export function NewOrg() {
             onChange={(e) => setTrainingInformation(e.target.value)}
           />
         </label>
+        <hr className='my-4' />
 
-        <div className="text-lg">{`B&T Contact`}</div>
+        <div className="text-xl">{`B&T Contact`}</div>
 
-        <label className="block text-gray-700 text-sm font-bold mb-2">{'B&T Contact Name'}
-          <input
-            className="w-64 bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"
-            type="text"
-            value={btContactName}
-            onChange={(e) => setbtContactName(e.target.value)}
-          />
-        </label>
+        <div className='flex flex-row gap-6'>
+          <label className="block text-gray-700 text-sm font-bold mb-2">{'B&T Contact Name'}
+            <input
+              className="w-64 bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"
+              type="text"
+              value={btContactName}
+              onChange={(e) => setbtContactName(e.target.value)}
+            />
+          </label>
 
-        <label className="block text-gray-700 text-sm font-bold mb-2">{'B&T Contact Email'}
-          <input
-            className="w-64 bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"
-            type="text"
-            value={btContactEmail}
-            onChange={(e) => setbtContactEmail(e.target.value)}
-          />
-        </label>
+          <label className="block text-gray-700 text-sm font-bold mb-2">{'B&T Contact Email'}
+            <input
+              className="w-64 bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"
+              type="text"
+              value={btContactEmail}
+              onChange={(e) => setbtContactEmail(e.target.value)}
+            />
+          </label>
 
-        <div className="text-lg">{`Program Contact`}</div>
+        </div>
+        <hr className='my-4' />
 
-        <label className="block text-gray-700 text-sm font-bold mb-2">{'Program Contact Name'}
-          <input
-            className="w-64 bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"
-            type="text"
-            value={volunteerContactName}
-            onChange={(e) => setvolunteerContactName(e.target.value)}
-          />
-        </label>
+        <div className="text-xl">{`Program Contact`}</div>
+        <div className='flex flex-row gap-6'>
 
-        <label className="block text-gray-700 text-sm font-bold mb-2">{'Program Contact Email'}
-          <input
-            className="w-64 bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"
-            type="text"
-            value={volunteerContactEmail}
-            onChange={(e) => setvolunteerContactEmail(e.target.value)}
-          />
-        </label>
+          <label className="block text-gray-700 text-sm font-bold mb-2">{'Program Contact Name'}
+            <input
+              className="w-64 bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"
+              type="text"
+              value={volunteerContactName}
+              onChange={(e) => setvolunteerContactName(e.target.value)}
+            />
+          </label>
 
-        <label className="block text-gray-700 text-sm font-bold mb-2">{'Program Contact Phone'}
-          <input
-            className="w-64 bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"
-            type="text"
-            value={volunteerContactPhone}
-            onChange={(e) => setvolunteerContactPhone(e.target.value)}
-          />
-        </label>
+          <label className="block text-gray-700 text-sm font-bold mb-2">{'Program Contact Email'}
+            <input
+              className="w-64 bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"
+              type="text"
+              value={volunteerContactEmail}
+              onChange={(e) => setvolunteerContactEmail(e.target.value)}
+            />
+          </label>
+
+          <label className="block text-gray-700 text-sm font-bold mb-2">{'Program Contact Phone'}
+            <input
+              className="w-64 bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"
+              type="text"
+              value={volunteerContactPhone}
+              onChange={(e) => setvolunteerContactPhone(e.target.value)}
+            />
+          </label>
+        </div>
         <hr className='my-4' />
         <label className="block text-gray-700 text-sm font-bold mb-2">Tags, comma separated:
           <input

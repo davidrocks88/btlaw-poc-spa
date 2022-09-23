@@ -178,7 +178,7 @@ export function NewOrg() {
 
 
 
-        <div className="flex flex-row my-2">
+        <div className='my-2 flex flex-row flex-wrap gap-y-2 items-end align-middle content-center'>
           {allTags?.map(t => <div key={t} className="flex"><div className={`cursor-pointer text-sm p-1 px-2 m-1 rounded-full inline hover:bg-gray-100 bg-gray-200`} onClick={() => handleFilter(t, true)}>{t}</div></div>)}
         </div>
 

@@ -8,11 +8,11 @@ export interface IOrganization {
   name: string
   description: string
   btContactName?: string
-  btContactEmail?: string
   volunteerContactName?: string
   volunteerContactEmail?: string
   volunteerContactPhone?: string
   orgUrl?: string
+  volunteerUrl?: string
   tags: string[]
   trainingInformation?: string
   areasServed?: string
@@ -58,7 +58,7 @@ export function Organization({ organization }: OrganizationProps) {
       <div className="grow"></div>
       <div className="flex flex-row">
         <div className="grow"></div>
-        <a href={`mailto:${organization.volunteerContactEmail}`} target="_blank" rel="noreferrer"><button className="w-42 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        <a href={`${organization.volunteerUrl ? organization.volunteerUrl : `mailto:${organization.volunteerContactEmail}`}`} target="_blank" rel="noreferrer"><button className="w-42 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
           Volunteer Now
         </button></a>
       </div>

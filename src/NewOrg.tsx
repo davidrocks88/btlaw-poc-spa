@@ -12,7 +12,7 @@ export function NewOrg() {
   const [trainingInformation, setTrainingInformation] = useState("");
   const [tags, setTags] = useState("");
   const [btContactName, setbtContactName] = useState("")
-  const [btContactEmail, setbtContactEmail] = useState("")
+  const [volunteerUrl, setvolunteerUrl] = useState("")
   const [volunteerContactName, setvolunteerContactName] = useState("")
   const [volunteerContactPhone, setvolunteerContactPhone] = useState("")
   const [volunteerContactEmail, setvolunteerContactEmail] = useState("")
@@ -30,7 +30,7 @@ export function NewOrg() {
         description,
         trainingInformation,
         btContactName,
-        btContactEmail,
+        volunteerUrl,
         volunteerContactName,
         volunteerContactEmail,
         volunteerContactPhone,
@@ -87,6 +87,14 @@ export function NewOrg() {
               required
             />
           </label>
+          <label className="block text-gray-700 text-sm font-bold mb-2">Volunteer URL
+            <input
+              className="w-64 bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"
+              type="text"
+              value={volunteerUrl}
+              onChange={(e) => setvolunteerUrl(e.target.value)}
+            />
+          </label>
         </div>
         <label className="block text-gray-700 text-sm font-bold mb-2">Description{redStar}
           <input
@@ -125,16 +133,6 @@ export function NewOrg() {
               onChange={(e) => setbtContactName(e.target.value)}
             />
           </label>
-
-          <label className="block text-gray-700 text-sm font-bold mb-2">{'B&T Contact Email'}
-            <input
-              className="w-64 bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"
-              type="text"
-              value={btContactEmail}
-              onChange={(e) => setbtContactEmail(e.target.value)}
-            />
-          </label>
-
         </div>
         <hr className='my-4' />
 

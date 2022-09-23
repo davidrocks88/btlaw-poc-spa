@@ -48,7 +48,7 @@ export function Home() {
         </p>
       </div>
       <div className='mt-1 flex flex-row flex-wrap gap-y-2 items-end align-middle content-center'>
-        <div className='cursor-pointer border-2 hover:bg-gray-100 border-white rounded-full p-2 font-lg font-bold' onClick={() => setFilters({})}>Reset</div>
+        <div className='cursor-pointer border-2 hover:bg-gray-100 border-white rounded-full p-2 font-lg font-bold mb-[2px]' onClick={() => setFilters({})}>Reset</div>
         {tags?.map(t => <div key={t} className='mb-3'><Tag filters={filters} name={t} handleClick={updateFilter} /></div>)}
       </div>
       <hr />

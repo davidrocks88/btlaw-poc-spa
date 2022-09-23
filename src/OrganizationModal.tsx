@@ -73,8 +73,8 @@ export default function OrganizationModal({ organization, hideModal }: Organizat
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
               <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
-                <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                  <div className="sm:flex sm:items-start">
+                <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4 w-full">
+                  <div className="sm:flex sm:items-star w-full">
                     <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                       <div className='flex justify-between'>
                         <a href={`https://${organization.orgUrl}`} target='_blank' rel="noreferrer"><div className="font-semibold text-xl mb-2 underline hover:text-blue-600">{organization.name}</div></a>
@@ -91,10 +91,10 @@ export default function OrganizationModal({ organization, hideModal }: Organizat
                           {organization.description}
                         </p>
                         <Accordion title="Training Information" content={organization.trainingInformation ?? `Something about traning information for ${organization.name}`} />
-                        <Accordion title="Areas Served" content={`List of areas served for ${organization.name}`} />
+                        <Accordion title="Areas Served" content={organization.areasServed ?? `List of areas served for ${organization.name}`} />
                         <Accordion title="Contact Information" content={<>
-                          <a target="_blank" href={`mailto://${organization.btContactEmail}`} rel="noreferrer"><div>{"B&T Contact Information: " + organization.btContactName}</div></a>
-                          <a target="_blank" href={`mailto://${organization.orgUrl}`} rel="noreferrer"><div>{organization.name + " Contact Information: "}</div></a>
+                          <div>{"B&T Contact Information: " + organization.btContactName}</div>
+                          <a target="_blank" href={`mailto://${organization.volunteerContactEmail}`} rel="noreferrer"><div>{organization.name + " Contact: " + organization.volunteerContactName} - {organization.volunteerContactPhone}, {organization.volunteerContactEmail}</div></a>
                         </>} />
                       </div>
                     </div>

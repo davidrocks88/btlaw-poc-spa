@@ -1,8 +1,9 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { Fragment, useRef, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-import { IOrganization, OrganizationProps } from './Organization'
+import { IOrganization } from './Organization'
 import { Accordion } from './Accordion'
+import EditIcon from "./edit-button-svgrepo-com.svg"
 
 export interface OrganizationModalProps {
   organization: IOrganization
@@ -100,7 +101,10 @@ export default function OrganizationModal({ organization, hideModal }: Organizat
                     </div>
                   </div>
                 </div>
-                <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                <div className="bg-gray-50 px-4 py-3 flex justify-between sm:px-6 items-center">
+                  <a href={`/newOrg/${organization.id}`}>
+                    <img className='h-10 cursor-pointer hover:bg-gray-300 p-2 rounded' src={EditIcon} alt="React Logo" /></a>
+
                   <button
                     type="button"
                     className="inline-flex w-full justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
@@ -108,6 +112,7 @@ export default function OrganizationModal({ organization, hideModal }: Organizat
                   >
                     Find Current Opportunities
                   </button>
+
                 </div>
               </Dialog.Panel>
             </Transition.Child>

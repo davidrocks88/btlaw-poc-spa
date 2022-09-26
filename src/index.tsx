@@ -14,7 +14,7 @@ import {
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query'
-import { NewOrg } from './NewOrg';
+import { OrgEditor } from './OrgEditor';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -46,7 +46,8 @@ root.render(
           <Routes>
             <Route path="/">
               <Route index element={<Home />} />
-              <Route path="newOrg" element={<NewOrg />} />
+              <Route path="newOrg" element={<OrgEditor />} />
+              <Route path="newOrg/:id" element={<OrgEditor />} />
 
             </Route>
           </Routes>

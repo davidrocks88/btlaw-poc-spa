@@ -1,13 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import { Home } from './App';
+import { App } from './App';
 import reportWebVitals from './reportWebVitals';
 import {
   BrowserRouter,
   Routes,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 
 import {
@@ -45,10 +44,9 @@ root.render(
           </nav>
           <Routes>
             <Route path="/">
-              <Route index element={<Home />} />
+              <Route index element={<App />} />
               <Route path="newOrg" element={<OrgEditor />} />
               <Route path="newOrg/:id" element={<OrgEditor />} />
-
             </Route>
           </Routes>
         </div>

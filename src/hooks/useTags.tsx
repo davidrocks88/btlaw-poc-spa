@@ -1,7 +1,7 @@
 import {
   useQuery
 } from '@tanstack/react-query'
-import { BASE_URL } from '../Organization'
+import { BASE_URL } from '../common'
 import _ from "lodash"
 
 export function useTags() {

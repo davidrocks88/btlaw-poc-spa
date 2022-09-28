@@ -1,8 +1,9 @@
 import {
   useQuery
 } from '@tanstack/react-query'
-import { BASE_URL, IOrganization } from '../Organization'
+import { IOrganization } from '../Organization'
 import { v4 } from "uuid";
+import { BASE_URL } from '../common';
 
 function getEmptyOrg(): IOrganization {
   return {

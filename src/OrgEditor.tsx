@@ -1,4 +1,4 @@
-import { BASE_URL, IOrganization, OrganizationProps } from "./Organization";
+import { IOrganization, OrganizationProps } from "./Organization";
 import { useNavigate, useParams } from "react-router-dom";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
@@ -7,7 +7,7 @@ import { v4 } from "uuid";
 import { useFormik } from 'formik';
 import { useTags } from "./hooks/useTags";
 import { useOrganization } from "./hooks/useOrganization";
-import { toTitleCase } from "./common";
+import { BASE_URL, toTitleCase } from "./common";
 
 export function OrgEditor() {
   const { id } = useParams()

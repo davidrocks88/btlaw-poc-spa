@@ -1,15 +1,16 @@
 import { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { Organization, useOrganizations } from './Organization';
+import { Organization } from './Organization';
 import { Tag } from './Tag';
 import { useTags } from './hooks/useTags';
+import { useOrganizationList } from './hooks/useOrganizationList';
 
-export function Home() {
-  const { data: organizations } = useOrganizations()
+export function App() {
+  const { organizations } = useOrganizationList()
+  const { tags } = useTags()
   const [filters, setFilters] = useState<any>({})
   const [searchString, setSearchString] = useState<string>('')
-  const { tags } = useTags()
 
   function updateFilter(name: string, shouldFilter: Boolean) {
     setFilters({
@@ -77,28 +78,6 @@ export function Home() {
           {orgsToShow?.sort((a, b) => (a.name < b.name ? -1 : 1)).map(org => <Organization organization={org} />)}
         </div>
       </div>
-    </div>
-  );
-}
-
-
-export function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload2.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
     </div>
   );
 }

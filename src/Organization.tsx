@@ -1,6 +1,3 @@
-import {
-  useQuery
-} from '@tanstack/react-query'
 import { useState } from 'react'
 import OrganizationModal from './OrganizationModal'
 import _ from "lodash";
@@ -24,16 +21,6 @@ export interface IOrganization {
 
 export interface OrganizationProps {
   organization: IOrganization
-}
-
-export const BASE_URL = 'https://kwihtaig61.execute-api.us-east-1.amazonaws.com'
-
-export function useOrganizations() {
-  return useQuery<IOrganization[]>(['organizations'], async () => {
-    const res = await fetch(`${BASE_URL}/organizations`)
-    const json = await res.json()
-    return json
-  })
 }
 
 function getDescriptionTruncated(description: string) {

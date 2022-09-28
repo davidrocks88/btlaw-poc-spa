@@ -6,3 +6,5 @@ export function toTitleCase(str: string) {
     }
   );
 }
+
+export const BASE_URL = 'https://kwihtaig61.execute-api.us-east-1.amazonaws.com'

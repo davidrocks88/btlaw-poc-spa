@@ -44,28 +44,38 @@ export function Home() {
   return (
     <div>
       <div className='p-2 bg-gray-200 m-1 border'>
-        <p className=''>{'Welcome to the B&T pro bono programs and opportunities finder. Various approved programs are listed. To find just programs that might interest you, click on the areas of interest tags below. For each one you select the pro bono programs that offer projects in that area will show as cards. Click Reset to clear the areas of interest. Each card has the program description (the name of the program is a link to its website), a description of the organization, links to find current opportunities, and a button to email the organization to let them know you are interested in volunteering. To learn more, click on the double arrow on each card. You can also search by using the search window. You can also post a review of that program to let others know how your experience was.'}
-        </p>
-      </div>
-      <div className='mt-1 flex flex-row flex-wrap gap-y-2 items-end align-middle content-center'>
-        {tags.map(t => <div key={t} className='mb-3'><Tag filters={filters} name={t} handleClick={updateFilter} /></div>)}
-      </div>
-      <hr />
+        <p>Welcome to the pro bono program and opportunities Finder. This website will help you find pro bono programs and opportunities in the areas in which you are interested.</p>
+        <br />
+        <p>How to use the Finder:</p>
+        <p className='pl-2'>1. Click on one or more "tags" with areas in which you are interested. Or, use the search bar below the tags. Click Reset to clear the selected tags.</p>
+        <p className='pl-2'>2. For all the tags you've selected, cards will appear below. Each card is a pro bono program which offers opportunities in selected areas.</p>
+        <p className='pl-2'>3. For each card, the name of the organization is a link to its website. Click on the Volunteer Now button to send an email directly to the volunteer coordinator at that organization. Cards which have Various as a tag have a large number of areas of law/interest, and not all may be listed.</p>
+        <p className='pl-2'>4. Click More to learn about training, geographic areas served, contact information, B&T contact person, etc. Click on Find Current Opportunities to link to the organization's website with more information.</p>
+        <p className='pl-2'>5. You can browse all cards by not selecting any tags.</p>
 
-      <div className="relative w-1/2 m-2">
+        <br />
+        <p>
+          Cards have as much information as we currently have; some may not have all areas of interest tagged or have full information.
+        </p>
+
+      </div>
+      <div className="relative w-1/2 m-2 grow">
         <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
           <svg aria-hidden="true" className="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
         </div>
         <div className='flex flex-row gap-4'>
           <input onChange={(event) => setSearchString(event.target.value)} type="search" id="default-search" className="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search Organization, Descriptions, Tags..." required />
-          <div className='cursor-pointer border-2 hover:bg-gray-100 border-white rounded-full p-2 font-lg font-bold mb-[2px]' onClick={() => setFilters({})}>Reset</div>
         </div>
       </div>
+      <div className='grid grid-flow-col grid-cols-8 justify-start content-start items-start bg-gray-100'>
+        <div className='pt-2 flex flex-row flex-wrap gap-y-2 items-end align-middle content-center'>
+          <div className='cursor-pointer hover:bg-gray-200 rounded-full p-2 font-lg font-bold mb-[2px]' onClick={() => setFilters({})}>Reset</div>
+          {tags.map(t => <div key={t} className='mb-3'><Tag filters={filters} name={t} handleClick={updateFilter} /></div>)}
+        </div>
 
-      <hr />
-
-      <div className='flex flex-row flex-wrap'>
-        {orgsToShow?.sort((a, b) => (a.name < b.name ? -1 : 1)).map(org => <Organization organization={org} />)}
+        <div className='col-span-7 flex flex-row flex-wrap'>
+          {orgsToShow?.sort((a, b) => (a.name < b.name ? -1 : 1)).map(org => <Organization organization={org} />)}
+        </div>
       </div>
     </div>
   );

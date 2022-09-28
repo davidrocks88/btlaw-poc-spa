@@ -5,6 +5,7 @@ import { useState } from 'react'
 import OrganizationModal from './OrganizationModal'
 import _ from "lodash";
 import EditIcon from "./edit-button-svgrepo-com.svg"
+import { toTitleCase } from './common';
 
 export interface IOrganization {
   id: string
@@ -55,7 +56,7 @@ export function Organization({ organization }: OrganizationProps) {
 
       </div>
       <div className="flex flex-row flex-wrap">
-        {_.uniq(organization.tags.map(t => _.startCase(t))).map(t => <div key={t} className="flex"><div className={`text-sm p-1 px-2 m-1 border-2 rounded-full inline-block bg-gray-200`}>{t}</div>
+        {_.uniq(organization.tags.map(t => toTitleCase(t))).map(t => <div key={t} className="flex"><div className={`text-sm p-1 px-2 m-1 border-2 rounded-full inline-block bg-gray-200`}>{t}</div>
         </div>)}
       </div>
       {showModal && <OrganizationModal organization={organization} hideModal={() => setshowModal(false)} />}

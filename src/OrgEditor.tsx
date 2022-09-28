@@ -7,6 +7,7 @@ import { v4 } from "uuid";
 import { useFormik } from 'formik';
 import { useTags } from "./hooks/useTags";
 import { useOrganization } from "./hooks/useOrganization";
+import { toTitleCase } from "./common";
 
 export function OrgEditor() {
   const { id } = useParams()
@@ -32,13 +33,13 @@ function OrgEditorForm({ organization }: OrganizationProps) {
       tagString: organization?.tags.join(',') ?? ''
     },
     onSubmit: values => {
-      values.tags = values.tags.map(t => _.startCase(t))
+      values.tags = values.tags.map(t => toTitleCase(t))
       fetch(`${BASE_URL}/organizations`, {
         method: 'POST',
         mode: 'no-cors',
         body: JSON.stringify({
           ...values,
-          tags: values.tagString.split(',').map(t => _.startCase(t.trim()))
+          tags: values.tagString.split(',').map(t => toTitleCase(t.trim()))
         }),
         headers: new Headers({ 'content-type': 'application/json' })
       }).then(res => console.log(res)).then(a => navigate("../", { replace: true }))
@@ -200,7 +201,7 @@ function OrgEditorForm({ organization }: OrganizationProps) {
 
         <div className="flex flex-row gap-2">
           <a href='/'>
-            <div className='text-black bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800'>
+            <div className='text-black bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center'>
               Go Back
             </div>
           </a>

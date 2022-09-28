@@ -102,8 +102,8 @@ export default function OrganizationModal({ organization, hideModal }: Organizat
                   </div>
                 </div>
                 <div className="bg-gray-50 px-4 py-3 flex justify-between sm:px-6 items-center">
-                  <a href={`/newOrg/${organization.id}`}>
-                    <img className='h-10 cursor-pointer hover:bg-gray-300 p-2 rounded' src={EditIcon} alt="React Logo" /></a>
+                  {/* <a href={`/newOrg/${organization.id}`}>
+                    <img className='h-10 cursor-pointer hover:bg-gray-300 p-2 rounded' src={EditIcon} alt="React Logo" /></a> */}
 
                   <button
                     type="button"

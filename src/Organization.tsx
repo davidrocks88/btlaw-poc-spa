@@ -66,8 +66,8 @@ export function Organization({ organization }: OrganizationProps) {
         <button onClick={() => setshowModal(true)} className="w-42 bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">
           More
         </button>
-        <a href={`/newOrg/${organization.id}`}>
-          <img className='h-10 cursor-pointer hover:bg-gray-300 p-2 rounded' src={EditIcon} alt="React Logo" /></a>
+        {/* <a href={`/newOrg/${organization.id}`}>
+          <img className='h-10 cursor-pointer hover:bg-gray-300 p-2 rounded' src={EditIcon} alt="React Logo" /></a> */}
         <a href={`${organization.volunteerUrl ? organization.volunteerUrl : `mailto:${organization.volunteerContactEmail}`}`} target="_blank" rel="noreferrer"><button className="w-42 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
           Volunteer Now
         </button></a>

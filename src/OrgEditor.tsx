@@ -2,7 +2,6 @@ import { IOrganization, OrganizationProps } from "./Organization";
 import { useNavigate, useParams } from "react-router-dom";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-import _ from "lodash";
 import { v4 } from "uuid";
 import { useFormik } from 'formik';
 import { useTags } from "./hooks/useTags";

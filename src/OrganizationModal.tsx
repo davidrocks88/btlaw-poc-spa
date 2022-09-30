@@ -96,7 +96,7 @@ export default function OrganizationModal({ organization, hideModal }: Organizat
                         <Accordion title="Areas Served" content={organization.areasServed ?? `List of areas served for ${organization.name}`} />
                         <Accordion title="Contact Information" content={<>
                           <div>{"B&T Contact Information: " + organization.btContactName}</div>
-                          <a target="_blank" href={`mailto://${organization.volunteerContactEmail}`} rel="noreferrer"><div>{organization.name + " Contact: " + organization.volunteerContactName} - {organization.volunteerContactPhone}, {organization.volunteerContactEmail}</div></a>
+                          <a target="_blank" href={`mailto:${organization.volunteerContactEmail}`} rel="noreferrer"><div>{organization.name + " Contact: " + (organization.volunteerContactName ?? '')}{organization.volunteerContactName ? ' - ' : ''} {organization.volunteerContactPhone ?? ''}, {organization.volunteerContactEmail ?? ''}</div></a>
                         </>} />
                       </div>
                     </div>
@@ -111,7 +111,9 @@ export default function OrganizationModal({ organization, hideModal }: Organizat
                     className="inline-flex w-full justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
                     onClick={() => setOpen(false)}
                   >
-                    Find Current Opportunities
+                    <a href={organization.volunteerUrl} target='_blank' rel="noreferrer">
+                      Find Current Opportunities
+                    </a>
                   </button>
 
                 </div>

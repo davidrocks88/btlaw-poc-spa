@@ -68,7 +68,10 @@ export function App() {
       </div>
       <div className='grid grid-flow-col grid-cols-7 justify-start content-start items-start bg-gray-100'>
         <div className='pt-2 flex flex-row flex-wrap gap-y-2 items-end align-middle content-center'>
-          <div className='cursor-pointer hover:bg-gray-200 rounded-full p-2 font-lg font-bold mb-[2px]' onClick={() => setFilters({})}>Reset</div>
+          <div className='flex flex-col items-center justify-center content-center w-full'>
+            <div className='font-bold text-red-700 text-xl'>TAGS</div>
+            <div className='cursor-pointer hover:bg-gray-200 rounded-full p-2 font-lg font-bold mb-[2px]' onClick={() => setFilters({})}>Reset</div>
+          </div>
           {tags.map(t => <div key={t} className='mb-3'><Tag filters={filters} name={t} handleClick={updateFilter} /></div>)}
         </div>
 

@@ -3,6 +3,8 @@ import OrganizationModal from './OrganizationModal'
 import _ from "lodash";
 import EditIcon from "./edit-button-svgrepo-com.svg"
 import { toTitleCase } from './common';
+import { DataStore } from '@aws-amplify/datastore';
+import { Tag } from './models';
 
 export interface IOrganization {
   id: string
@@ -37,6 +39,29 @@ export function Organization({ organization }: OrganizationProps) {
   const [showModal, setshowModal] = useState<Boolean>(false)
   const showEditButton = false
 
+  async function createItem() {
+    try {
+      await DataStore.save(
+        new Tag({
+          name: "temp",
+          organizations: []
+        })
+      );
+      console.log("Post saved successfully!");
+    } catch (error) {
+      console.log("Error saving post", error);
+    }
+  }
+
+  async function getItems() {
+    try {
+      const tags = await DataStore.query(Tag);
+      console.log("tags retrieved successfully!", JSON.stringify(tags, null, 2));
+    } catch (error) {
+      console.log("Error retrieving tags", error);
+    }
+  }
+
   return (
     <div className="w-96 m-4 p-4 flex flex-col rounded overflow-hidden shadow-lg" key={organization.name}>
       <div className='flex justify-between cursor-pointer'>
@@ -59,6 +84,8 @@ export function Organization({ organization }: OrganizationProps) {
         <a href={`${organization.volunteerUrl ? organization.volunteerUrl : `mailto:${organization.volunteerContactEmail}`}`} target="_blank" rel="noreferrer"><button className="w-42 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
           Volunteer Now
         </button></a>
+        <button onClick={createItem}>Click</button>
+        <button onClick={getItems}>Click2</button>
       </div>
 
     </div>

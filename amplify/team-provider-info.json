@@ -1,0 +1,15 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-btlawprobono-staging-42942-authRole",
+      "UnauthRoleArn": "arn:aws:iam::886077822113:role/amplify-btlawprobono-staging-42942-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::886077822113:role/amplify-btlawprobono-staging-42942-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-btlawprobono-staging-42942-deployment",
+      "UnauthRoleName": "amplify-btlawprobono-staging-42942-unauthRole",
+      "StackName": "amplify-btlawprobono-staging-42942",
+      "StackId": "arn:aws:cloudformation:us-east-1:886077822113:stack/amplify-btlawprobono-staging-42942/4c9028a0-60b0-11ed-97a4-0a3fbc0d12d3",
+      "AmplifyAppId": "d339vn7ichehne"
+    }
+  }
+}

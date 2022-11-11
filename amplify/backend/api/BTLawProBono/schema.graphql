@@ -1,0 +1,20 @@
+type Tag @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String
+  organizations: [Organization] @manyToMany(relationName: "OrganizationTag")
+}
+
+type Organization @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String!
+  description: String
+  btContactName: String
+  volunteerContactName: String
+  volunteerContactEmail: AWSEmail
+  volunteerContactPhone: AWSPhone
+  volunteerUrl: AWSURL
+  trainingInformation: String
+  areasServed: String
+  Tags: [Tag] @manyToMany(relationName: "OrganizationTag")
+}
+ 

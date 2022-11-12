@@ -1,11 +1,25 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import { Organization } from './Organization';
 import { Tag } from './Tag';
 import { useTags } from './hooks/useTags';
 import { useOrganizationList } from './hooks/useOrganizationList';
+import { listTags } from './graphql/queries'
+import { API, graphqlOperation } from 'aws-amplify';
 
 export function App() {
+  useEffect(() => {
+    fetchTodos()
+  }, [])
+
+  async function fetchTodos() {
+    try {
+      const tagsData = await API.graphql<any>(graphqlOperation(listTags))
+      const tags = tagsData.data.listTags.items
+      console.log({ tags })
+    } catch (err) { console.log('error fetching todos') }
+  }
+
   const { organizations } = useOrganizationList()
   const { tags } = useTags()
   const [filters, setFilters] = useState<any>({})

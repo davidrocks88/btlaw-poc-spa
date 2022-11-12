@@ -15,6 +15,10 @@ import {
   QueryClientProvider,
 } from '@tanstack/react-query'
 import { OrgEditor } from './OrgEditor';
+import awsExports from './aws-exports';
+import { Amplify } from 'aws-amplify';
+
+Amplify.configure(awsExports);
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

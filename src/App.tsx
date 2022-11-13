@@ -1,29 +1,23 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import './App.css';
 import { Organization } from './Organization';
-import { Tag } from './Tag';
-import { useTags } from './hooks/useTags';
-import { useOrganizationList } from './hooks/useOrganizationList';
-import { listTags } from './graphql/queries'
-import { API, graphqlOperation } from 'aws-amplify';
+import { Tag as TagComponent } from './Tag';
+import { useTags } from './amplifyHooks/useTags';
+import { useOrganizationList } from './amplifyHooks/useOrganizationList';
+import { useOrganizationTagList } from './amplifyHooks/useOrganizationTagList';
+import { Tag } from './API';
 
 export function App() {
-  useEffect(() => {
-    fetchTodos()
-  }, [])
-
-  async function fetchTodos() {
-    try {
-      const tagsData = await API.graphql<any>(graphqlOperation(listTags))
-      const tags = tagsData.data.listTags.items
-      console.log({ tags })
-    } catch (err) { console.log('error fetching todos') }
-  }
-
-  const { organizations } = useOrganizationList()
+  const { organizationList } = useOrganizationList()
+  const { organizationTagList } = useOrganizationTagList()
   const { tags } = useTags()
   const [filters, setFilters] = useState<any>({})
   const [searchString, setSearchString] = useState<string>('')
+  const [selectedTags, setSelectedTags] = useState<{
+    [tagId: string]: Boolean
+  }>({})
+
+  console.log({ organizationList, organizationTagList })
 
   function updateFilter(name: string, shouldFilter: Boolean) {
     setFilters({
@@ -31,18 +25,27 @@ export function App() {
       [name]: shouldFilter
     })
   }
+
+  function selectTagFilter(tag: Tag, shouldFilter: Boolean) {
+    setSelectedTags({
+      ...selectedTags,
+      [tag.id]: shouldFilter
+    })
+  }
+
   let areAllFalse = true
 
   for (let filterVal of Object.values(filters)) {
     areAllFalse = areAllFalse && filterVal === false
   }
 
-  let orgsToShow = organizations
+  let orgsToShow = organizationList
 
   if (Object.keys(filters).length > 0 && areAllFalse === false) {
     orgsToShow = orgsToShow?.filter(org => {
-      for (let tag of org.tags) {
-        if (filters[tag] === true) {
+      const tags = organizationTagList?.filter(orgTag => orgTag.organizationID === org.id).map(orgTag => orgTag.tag)
+      for (let tag of tags) {
+        if (filters[tag.name] === true) {
           return true
         }
       }
@@ -51,7 +54,7 @@ export function App() {
   }
 
   if (searchString.length > 0) {
-    orgsToShow = orgsToShow?.filter((org) => org.name.toLowerCase().includes(searchString.toLowerCase()) || org.description.toLowerCase().includes(searchString.toLowerCase()) || org.tags.join('').toLowerCase().includes(searchString.toLowerCase()))
+    orgsToShow = orgsToShow?.filter((org) => org.name.toLowerCase().includes(searchString.toLowerCase()) || org?.description?.toLowerCase().includes(searchString.toLowerCase()) || org?.tags?.items.join('').toLowerCase().includes(searchString.toLowerCase()))
   }
 
 
@@ -86,7 +89,7 @@ export function App() {
             <div className='font-bold text-red-700 text-xl'>TAGS</div>
             <div className='cursor-pointer hover:bg-gray-200 rounded-full p-2 font-lg font-bold mb-[2px]' onClick={() => setFilters({})}>Reset</div>
           </div>
-          {tags.map(t => <div key={t} className='mb-3'><Tag filters={filters} name={t} handleClick={updateFilter} /></div>)}
+          {tags.map(t => <div key={t.name} className='mb-3'><TagComponent filters={filters} name={t.name} handleClick={updateFilter} /></div>)}
         </div>
 
         <div className='col-span-6 flex flex-row flex-wrap'>

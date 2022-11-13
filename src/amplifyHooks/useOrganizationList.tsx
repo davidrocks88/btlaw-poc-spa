@@ -18,9 +18,11 @@ export function useOrganizationList() {
   )
 
   const { isLoading: organizationTagListLoading, organizationTagList, refetch: refetchOrganizationTagList } = useOrganizationTagList()
+  console.log('in query', { organizationTagList })
 
   if (!isLoading && !organizationTagListLoading && data && organizationTagList) {
     data.forEach(org => {
+      console.log("looking for tags for org: ", org, organizationTagList.filter(orgTag => orgTag.organizationID == org.id))
       org.tags = {
         __typename: "ModelOrganizationTagConnection",
         items: [
@@ -29,6 +31,8 @@ export function useOrganizationList() {
       }
     })
   }
+
+  console.log({ data })
 
   return {
     isLoading: isLoading && organizationTagListLoading,

@@ -5,6 +5,7 @@ import EditIcon from "./edit-button-svgrepo-com.svg"
 import { toTitleCase } from './common';
 import { DataStore } from '@aws-amplify/datastore';
 import { Tag } from './models';
+import { Organization as OrganizationModel } from './API';
 
 export interface IOrganization {
   id: string
@@ -22,7 +23,7 @@ export interface IOrganization {
 }
 
 export interface OrganizationProps {
-  organization: IOrganization
+  organization: OrganizationModel
 }
 
 function getDescriptionTruncated(description: string) {
@@ -69,11 +70,11 @@ export function Organization({ organization }: OrganizationProps) {
 
       </div>
       <div className="flex flex-row flex-wrap">
-        {_.uniq(organization.tags.map(t => toTitleCase(t))).map(t => <div key={t} className="flex"><div className={`text-sm p-1 px-2 m-1 border-2 rounded-full inline-block bg-gray-200`}>{t}</div>
+        {_.uniq(organization?.tags?.items.map(t => toTitleCase(t?.tag?.name ?? ''))).map(t => <div key={t} className="flex"><div className={`text-sm p-1 px-2 m-1 border-2 rounded-full inline-block bg-gray-200`}>{t}</div>
         </div>)}
       </div>
-      {showModal && <OrganizationModal organization={organization} hideModal={() => setshowModal(false)} />}
-      <div className="text-gray-700 text-base mb-2 overflow-hidden text-ellipsis">{getDescriptionTruncated(organization.description)}</div>
+      {/* {showModal && <OrganizationModal organization={organization} hideModal={() => setshowModal(false)} />} */}
+      <div className="text-gray-700 text-base mb-2 overflow-hidden text-ellipsis">{getDescriptionTruncated(organization?.description ?? '')}</div>
       <div className="grow"></div>
       <div className="flex flex-row justify-between">
         <button onClick={() => setshowModal(true)} className="w-42 bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">

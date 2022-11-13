@@ -2,8 +2,9 @@ import { useTags } from "./hooks/useTags"
 import { useOrganizationList } from "./hooks/useOrganizationList"
 import { useOrganizationList as useAmplifyOrganizationList } from "./amplifyHooks/useOrganizationList"
 import { useTags as useAmplifyTags, createTag, deleteTag } from "./amplifyHooks/useTags"
-import { createOrganization, deleteOrganization } from "./amplifyHooks/useOrganization"
+import { createOrganization, deleteOrganization, deleteOrganizationTag } from "./amplifyHooks/useOrganization"
 import { useOrganizationTagList } from "./amplifyHooks/useOrganizationTagList"
+import { ModelOrganizationTagConnection, Tag } from "./API"
 export function Migration() {
   const { tags } = useTags()
   const { organizations } = useOrganizationList()
@@ -32,8 +33,12 @@ export function Migration() {
           return
         } else {
           console.log('creating org:', legacyOrg.name)
-          const input = { ...legacyOrg, tags: undefined, id: undefined }
-          return await createOrganization({ ...input })
+
+          const tagsToMigrate = await Promise.all(legacyOrg.tags.map(legacyTagName => amplifyTags.find(amplifyTag => amplifyTag.name === legacyTagName)))
+          const input = {
+            ...legacyOrg, tags: undefined, id: undefined
+          }
+          return await createOrganization({ ...input }, tagsToMigrate.filter(t => !!t) as Tag[])
         }
 
 
@@ -56,6 +61,10 @@ export function Migration() {
   function deleteAllOrganizations() {
     for (const org of amplifyOrganizationList ?? []) {
       deleteOrganization(org)
+    }
+
+    for (const orgTag of organizationTagList) {
+      deleteOrganizationTag(orgTag)
     }
   }
 

@@ -2,7 +2,7 @@ import {
   useQuery
 } from '@tanstack/react-query'
 import { API, graphqlOperation } from 'aws-amplify';
-import { Organization } from '../API';
+import { Organization, OrganizationTag, Tag } from '../API';
 import * as queries from '../graphql/queries';
 import * as mutations from '../graphql/mutations';
 
@@ -25,25 +25,24 @@ export function useOrganization(id: string) {
   }
 }
 
-export async function createOrganization(organization: Omit<Organization, 'id' | '__typename' | 'createdAt' | 'updatedAt' | '_version' | '_lastChangedAt'>) {
+export async function createOrganization(organization: Omit<Organization, 'id' | '__typename' | 'createdAt' | 'updatedAt' | '_version' | '_lastChangedAt'>, tags?: Tag[]) {
   const newOrgData: any = await API.graphql(graphqlOperation(mutations.createOrganization, { input: { ...organization } }))
   const newOrg = newOrgData?.data.createOrganization as Organization
 
   // Create tags
-  if (organization.tags) {
-    for (const tag of organization.tags?.items) {
+  if (tags) {
+    for (const tag of tags) {
       if (tag) {
         await API.graphql(graphqlOperation(mutations.createOrganizationTag, {
           input: {
             tagID: tag.id,
-            organizationID: newOrg
+            organizationID: newOrg.id
           }
         }))
       }
     }
   }
 
-  console.log('created org:', newOrg.name)
 
   return newOrg
 }
@@ -52,3 +51,9 @@ export async function deleteOrganization({ id }: Organization) {
   const newOrg = await API.graphql(graphqlOperation(mutations.deleteOrganization, { input: { id } }))
   return newOrg
 }
+
+export async function deleteOrganizationTag({ id }: OrganizationTag) {
+  const newOrg = await API.graphql(graphqlOperation(mutations.deleteOrganizationTag, { input: { id } }))
+  return newOrg
+}
+

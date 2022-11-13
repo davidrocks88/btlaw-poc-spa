@@ -9,6 +9,10 @@ import { useOrganization } from "./hooks/useOrganization";
 import { BASE_URL, toTitleCase } from "./common";
 import { useState } from "react";
 
+export interface OrganizationFormProps {
+  organization: IOrganization
+}
+
 export function OrgEditor() {
   const { id } = useParams()
   const { organization, isLoading } = useOrganization(id)
@@ -20,7 +24,7 @@ export function OrgEditor() {
   }
 }
 
-function OrgEditorForm({ organization }: OrganizationProps) {
+function OrgEditorForm({ organization }: OrganizationFormProps) {
   const { tags } = useTags()
   let navigate = useNavigate();
   const [creatingTag, setCreatingTag] = useState(false)

@@ -2,7 +2,7 @@ import { useTags } from "./hooks/useTags"
 import { useOrganizationList } from "./hooks/useOrganizationList"
 import { useOrganizationList as useAmplifyOrganizationList } from "./amplifyHooks/useOrganizationList"
 import { useTags as useAmplifyTags, createTag } from "./amplifyHooks/useTags"
-import { createOrganization, deleteOrganization } from "./amplifyHooks/useOrganization"
+import { createOrganization, deleteOrganization, createOrganizationTag } from "./amplifyHooks/useOrganization"
 export function Migration() {
   const { tags } = useTags()
   const { organizations } = useOrganizationList()
@@ -20,13 +20,20 @@ export function Migration() {
     }
   }
 
-  function migrateOrganizations() {
+  async function migrateOrganizations() {
     for (const legacyOrg of organizations ?? []) {
       if (amplifyOrganizationList?.find(org => org.name === legacyOrg.name || org.id === legacyOrg.id)) {
         console.log(`Already have legacy org:`, legacyOrg)
       } else {
-        const input = { ...legacyOrg, tags: undefined }
-        createOrganization({ ...input })
+        const input = { ...legacyOrg, tags: undefined, id: undefined }
+        const newOrg = await createOrganization({ ...input })
+
+        for (const legacyTag of legacyOrg.tags) {
+          const amplifyTag = amplifyTags.find(t => t.name === legacyTag)
+          if (amplifyTag) {
+            createOrganizationTag(newOrg.id, amplifyTag.id)
+          }
+        }
       }
 
     }

@@ -12,9 +12,7 @@ export function useTags() {
   // @ts-ignore
   const { data, refetch } = useQuery<Tag[]>(['tags', 'amplify'], async () => {
     const tagsData = await API.graphql<any>(graphqlOperation(listTags))
-    const tags = tagsData.data.listTags.items
-
-
+    const tags = tagsData.data.listTags.items.filter((tag: Tag) => tag._deleted !== true)
     return tags
   }, {
     cacheTime: 0

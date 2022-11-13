@@ -14,7 +14,7 @@ export const schema = {
                     "name": "name",
                     "isArray": false,
                     "type": "String",
-                    "isRequired": false,
+                    "isRequired": true,
                     "attributes": []
                 },
                 "organizations": {
@@ -114,21 +114,21 @@ export const schema = {
                 "volunteerContactEmail": {
                     "name": "volunteerContactEmail",
                     "isArray": false,
-                    "type": "AWSEmail",
+                    "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
                 "volunteerContactPhone": {
                     "name": "volunteerContactPhone",
                     "isArray": false,
-                    "type": "AWSPhone",
+                    "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
                 "volunteerUrl": {
                     "name": "volunteerUrl",
                     "isArray": false,
-                    "type": "AWSURL",
+                    "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -141,6 +141,13 @@ export const schema = {
                 },
                 "areasServed": {
                     "name": "areasServed",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "orgUrl": {
+                    "name": "orgUrl",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
@@ -285,5 +292,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "d7bd22d180223301787d21ba3bf3fd0b"
+    "version": "a4fc0098350e0bef7bff8c7271d8a4c0"
 };

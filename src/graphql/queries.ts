@@ -80,6 +80,7 @@ export const getOrganization = /* GraphQL */ `
       volunteerUrl
       trainingInformation
       areasServed
+      orgUrl
       Tags {
         nextToken
         startedAt
@@ -110,6 +111,7 @@ export const listOrganizations = /* GraphQL */ `
         volunteerUrl
         trainingInformation
         areasServed
+        orgUrl
         createdAt
         updatedAt
         _version
@@ -145,6 +147,7 @@ export const syncOrganizations = /* GraphQL */ `
         volunteerUrl
         trainingInformation
         areasServed
+        orgUrl
         createdAt
         updatedAt
         _version
@@ -182,6 +185,7 @@ export const getOrganizationTag = /* GraphQL */ `
         volunteerUrl
         trainingInformation
         areasServed
+        orgUrl
         createdAt
         updatedAt
         _version

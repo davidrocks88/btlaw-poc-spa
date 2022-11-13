@@ -4,7 +4,7 @@
 
 export type CreateTagInput = {
   id?: string | null,
-  name?: string | null,
+  name: string,
   _version?: number | null,
 };
 
@@ -58,7 +58,7 @@ export type ModelSizeInput = {
 export type Tag = {
   __typename: "Tag",
   id: string,
-  name?: string | null,
+  name: string,
   organizations?: ModelOrganizationTagConnection | null,
   createdAt: string,
   updatedAt: string,
@@ -100,6 +100,7 @@ export type Organization = {
   volunteerUrl?: string | null,
   trainingInformation?: string | null,
   areasServed?: string | null,
+  orgUrl?: string | null,
   Tags?: ModelOrganizationTagConnection | null,
   createdAt: string,
   updatedAt: string,
@@ -130,6 +131,7 @@ export type CreateOrganizationInput = {
   volunteerUrl?: string | null,
   trainingInformation?: string | null,
   areasServed?: string | null,
+  orgUrl?: string | null,
   _version?: number | null,
 };
 
@@ -143,6 +145,7 @@ export type ModelOrganizationConditionInput = {
   volunteerUrl?: ModelStringInput | null,
   trainingInformation?: ModelStringInput | null,
   areasServed?: ModelStringInput | null,
+  orgUrl?: ModelStringInput | null,
   and?: Array< ModelOrganizationConditionInput | null > | null,
   or?: Array< ModelOrganizationConditionInput | null > | null,
   not?: ModelOrganizationConditionInput | null,
@@ -159,6 +162,7 @@ export type UpdateOrganizationInput = {
   volunteerUrl?: string | null,
   trainingInformation?: string | null,
   areasServed?: string | null,
+  orgUrl?: string | null,
   _version?: number | null,
 };
 
@@ -236,6 +240,7 @@ export type ModelOrganizationFilterInput = {
   volunteerUrl?: ModelStringInput | null,
   trainingInformation?: ModelStringInput | null,
   areasServed?: ModelStringInput | null,
+  orgUrl?: ModelStringInput | null,
   and?: Array< ModelOrganizationFilterInput | null > | null,
   or?: Array< ModelOrganizationFilterInput | null > | null,
   not?: ModelOrganizationFilterInput | null,
@@ -266,7 +271,7 @@ export type CreateTagMutation = {
   createTag?:  {
     __typename: "Tag",
     id: string,
-    name?: string | null,
+    name: string,
     organizations?:  {
       __typename: "ModelOrganizationTagConnection",
       nextToken?: string | null,
@@ -289,7 +294,7 @@ export type UpdateTagMutation = {
   updateTag?:  {
     __typename: "Tag",
     id: string,
-    name?: string | null,
+    name: string,
     organizations?:  {
       __typename: "ModelOrganizationTagConnection",
       nextToken?: string | null,
@@ -312,7 +317,7 @@ export type DeleteTagMutation = {
   deleteTag?:  {
     __typename: "Tag",
     id: string,
-    name?: string | null,
+    name: string,
     organizations?:  {
       __typename: "ModelOrganizationTagConnection",
       nextToken?: string | null,
@@ -344,6 +349,7 @@ export type CreateOrganizationMutation = {
     volunteerUrl?: string | null,
     trainingInformation?: string | null,
     areasServed?: string | null,
+    orgUrl?: string | null,
     Tags?:  {
       __typename: "ModelOrganizationTagConnection",
       nextToken?: string | null,
@@ -375,6 +381,7 @@ export type UpdateOrganizationMutation = {
     volunteerUrl?: string | null,
     trainingInformation?: string | null,
     areasServed?: string | null,
+    orgUrl?: string | null,
     Tags?:  {
       __typename: "ModelOrganizationTagConnection",
       nextToken?: string | null,
@@ -406,6 +413,7 @@ export type DeleteOrganizationMutation = {
     volunteerUrl?: string | null,
     trainingInformation?: string | null,
     areasServed?: string | null,
+    orgUrl?: string | null,
     Tags?:  {
       __typename: "ModelOrganizationTagConnection",
       nextToken?: string | null,
@@ -433,7 +441,7 @@ export type CreateOrganizationTagMutation = {
     tag:  {
       __typename: "Tag",
       id: string,
-      name?: string | null,
+      name: string,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -452,6 +460,7 @@ export type CreateOrganizationTagMutation = {
       volunteerUrl?: string | null,
       trainingInformation?: string | null,
       areasServed?: string | null,
+      orgUrl?: string | null,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -480,7 +489,7 @@ export type UpdateOrganizationTagMutation = {
     tag:  {
       __typename: "Tag",
       id: string,
-      name?: string | null,
+      name: string,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -499,6 +508,7 @@ export type UpdateOrganizationTagMutation = {
       volunteerUrl?: string | null,
       trainingInformation?: string | null,
       areasServed?: string | null,
+      orgUrl?: string | null,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -527,7 +537,7 @@ export type DeleteOrganizationTagMutation = {
     tag:  {
       __typename: "Tag",
       id: string,
-      name?: string | null,
+      name: string,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -546,6 +556,7 @@ export type DeleteOrganizationTagMutation = {
       volunteerUrl?: string | null,
       trainingInformation?: string | null,
       areasServed?: string | null,
+      orgUrl?: string | null,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -568,7 +579,7 @@ export type GetTagQuery = {
   getTag?:  {
     __typename: "Tag",
     id: string,
-    name?: string | null,
+    name: string,
     organizations?:  {
       __typename: "ModelOrganizationTagConnection",
       nextToken?: string | null,
@@ -594,7 +605,7 @@ export type ListTagsQuery = {
     items:  Array< {
       __typename: "Tag",
       id: string,
-      name?: string | null,
+      name: string,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -619,7 +630,7 @@ export type SyncTagsQuery = {
     items:  Array< {
       __typename: "Tag",
       id: string,
-      name?: string | null,
+      name: string,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -648,6 +659,7 @@ export type GetOrganizationQuery = {
     volunteerUrl?: string | null,
     trainingInformation?: string | null,
     areasServed?: string | null,
+    orgUrl?: string | null,
     Tags?:  {
       __typename: "ModelOrganizationTagConnection",
       nextToken?: string | null,
@@ -682,6 +694,7 @@ export type ListOrganizationsQuery = {
       volunteerUrl?: string | null,
       trainingInformation?: string | null,
       areasServed?: string | null,
+      orgUrl?: string | null,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -715,6 +728,7 @@ export type SyncOrganizationsQuery = {
       volunteerUrl?: string | null,
       trainingInformation?: string | null,
       areasServed?: string | null,
+      orgUrl?: string | null,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -739,7 +753,7 @@ export type GetOrganizationTagQuery = {
     tag:  {
       __typename: "Tag",
       id: string,
-      name?: string | null,
+      name: string,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -758,6 +772,7 @@ export type GetOrganizationTagQuery = {
       volunteerUrl?: string | null,
       trainingInformation?: string | null,
       areasServed?: string | null,
+      orgUrl?: string | null,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -827,7 +842,7 @@ export type OnCreateTagSubscription = {
   onCreateTag?:  {
     __typename: "Tag",
     id: string,
-    name?: string | null,
+    name: string,
     organizations?:  {
       __typename: "ModelOrganizationTagConnection",
       nextToken?: string | null,
@@ -845,7 +860,7 @@ export type OnUpdateTagSubscription = {
   onUpdateTag?:  {
     __typename: "Tag",
     id: string,
-    name?: string | null,
+    name: string,
     organizations?:  {
       __typename: "ModelOrganizationTagConnection",
       nextToken?: string | null,
@@ -863,7 +878,7 @@ export type OnDeleteTagSubscription = {
   onDeleteTag?:  {
     __typename: "Tag",
     id: string,
-    name?: string | null,
+    name: string,
     organizations?:  {
       __typename: "ModelOrganizationTagConnection",
       nextToken?: string | null,
@@ -890,6 +905,7 @@ export type OnCreateOrganizationSubscription = {
     volunteerUrl?: string | null,
     trainingInformation?: string | null,
     areasServed?: string | null,
+    orgUrl?: string | null,
     Tags?:  {
       __typename: "ModelOrganizationTagConnection",
       nextToken?: string | null,
@@ -916,6 +932,7 @@ export type OnUpdateOrganizationSubscription = {
     volunteerUrl?: string | null,
     trainingInformation?: string | null,
     areasServed?: string | null,
+    orgUrl?: string | null,
     Tags?:  {
       __typename: "ModelOrganizationTagConnection",
       nextToken?: string | null,
@@ -942,6 +959,7 @@ export type OnDeleteOrganizationSubscription = {
     volunteerUrl?: string | null,
     trainingInformation?: string | null,
     areasServed?: string | null,
+    orgUrl?: string | null,
     Tags?:  {
       __typename: "ModelOrganizationTagConnection",
       nextToken?: string | null,
@@ -964,7 +982,7 @@ export type OnCreateOrganizationTagSubscription = {
     tag:  {
       __typename: "Tag",
       id: string,
-      name?: string | null,
+      name: string,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -983,6 +1001,7 @@ export type OnCreateOrganizationTagSubscription = {
       volunteerUrl?: string | null,
       trainingInformation?: string | null,
       areasServed?: string | null,
+      orgUrl?: string | null,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -1006,7 +1025,7 @@ export type OnUpdateOrganizationTagSubscription = {
     tag:  {
       __typename: "Tag",
       id: string,
-      name?: string | null,
+      name: string,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -1025,6 +1044,7 @@ export type OnUpdateOrganizationTagSubscription = {
       volunteerUrl?: string | null,
       trainingInformation?: string | null,
       areasServed?: string | null,
+      orgUrl?: string | null,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -1048,7 +1068,7 @@ export type OnDeleteOrganizationTagSubscription = {
     tag:  {
       __typename: "Tag",
       id: string,
-      name?: string | null,
+      name: string,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -1067,6 +1087,7 @@ export type OnDeleteOrganizationTagSubscription = {
       volunteerUrl?: string | null,
       trainingInformation?: string | null,
       areasServed?: string | null,
+      orgUrl?: string | null,
       createdAt: string,
       updatedAt: string,
       _version: number,

@@ -78,6 +78,7 @@ export const createOrganization = /* GraphQL */ `
       volunteerUrl
       trainingInformation
       areasServed
+      orgUrl
       Tags {
         nextToken
         startedAt
@@ -106,6 +107,7 @@ export const updateOrganization = /* GraphQL */ `
       volunteerUrl
       trainingInformation
       areasServed
+      orgUrl
       Tags {
         nextToken
         startedAt
@@ -134,6 +136,7 @@ export const deleteOrganization = /* GraphQL */ `
       volunteerUrl
       trainingInformation
       areasServed
+      orgUrl
       Tags {
         nextToken
         startedAt
@@ -175,6 +178,7 @@ export const createOrganizationTag = /* GraphQL */ `
         volunteerUrl
         trainingInformation
         areasServed
+        orgUrl
         createdAt
         updatedAt
         _version
@@ -218,6 +222,7 @@ export const updateOrganizationTag = /* GraphQL */ `
         volunteerUrl
         trainingInformation
         areasServed
+        orgUrl
         createdAt
         updatedAt
         _version
@@ -261,6 +266,7 @@ export const deleteOrganizationTag = /* GraphQL */ `
         volunteerUrl
         trainingInformation
         areasServed
+        orgUrl
         createdAt
         updatedAt
         _version

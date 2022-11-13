@@ -14,7 +14,7 @@ type OrganizationTagMetaData = {
 
 export declare class Tag {
   readonly id: string;
-  readonly name?: string | null;
+  readonly name: string;
   readonly organizations?: (OrganizationTag | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
@@ -33,6 +33,7 @@ export declare class Organization {
   readonly volunteerUrl?: string | null;
   readonly trainingInformation?: string | null;
   readonly areasServed?: string | null;
+  readonly orgUrl?: string | null;
   readonly Tags?: (OrganizationTag | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;

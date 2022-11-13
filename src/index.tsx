@@ -17,6 +17,7 @@ import {
 import { OrgEditor } from './OrgEditor';
 import awsExports from './aws-exports';
 import { Amplify } from 'aws-amplify';
+import { Migration } from './Migration';
 
 Amplify.configure(awsExports);
 
@@ -55,6 +56,7 @@ root.render(
               <Route index element={<App />} />
               <Route path="newOrg" element={<OrgEditor />} />
               <Route path="newOrg/:id" element={<OrgEditor />} />
+              <Route path="migration" element={<Migration />} />
             </Route>
           </Routes>
         </div>

@@ -7,8 +7,8 @@ import { useOrganizationTagList } from "./amplifyHooks/useOrganizationTagList"
 export function Migration() {
   const { tags } = useTags()
   const { organizations } = useOrganizationList()
-  const { tags: amplifyTags, refetch } = useAmplifyTags()
-  const { organizationList: amplifyOrganizationList, refetch: refetchOrgs } = useAmplifyOrganizationList()
+  const { tags: amplifyTags } = useAmplifyTags()
+  const { organizationList: amplifyOrganizationList } = useAmplifyOrganizationList()
   const { organizationTagList } = useOrganizationTagList()
 
   console.log({ organizationTagList, amplifyOrganizationList })
@@ -63,11 +63,6 @@ export function Migration() {
     for (const tag of amplifyTags ?? []) {
       deleteTag(tag)
     }
-  }
-
-  function useCreateRandomTag() {
-    createTag(`${Math.random()}`)
-    refetch()
   }
 
   return (

@@ -2,7 +2,7 @@ import {
   useQuery
 } from '@tanstack/react-query'
 import { API, graphqlOperation } from 'aws-amplify';
-import { Organization, OrganizationTag } from '../API';
+import { Organization } from '../API';
 import * as queries from '../graphql/queries';
 import * as mutations from '../graphql/mutations';
 
@@ -30,8 +30,8 @@ export async function createOrganization(organization: Omit<Organization, 'id' |
   const newOrg = newOrgData?.data.createOrganization as Organization
 
   // Create tags
-  if (organization.Tags) {
-    for (const tag of organization.Tags?.items) {
+  if (organization.tags) {
+    for (const tag of organization.tags?.items) {
       if (tag) {
         await API.graphql(graphqlOperation(mutations.createOrganizationTag, {
           input: {
@@ -48,7 +48,7 @@ export async function createOrganization(organization: Omit<Organization, 'id' |
   return newOrg
 }
 
-export async function deleteOrganization({ id, _version }: Organization) {
-  const newOrg = await API.graphql(graphqlOperation(mutations.deleteOrganization, { input: { id, _version } }))
+export async function deleteOrganization({ id }: Organization) {
+  const newOrg = await API.graphql(graphqlOperation(mutations.deleteOrganization, { input: { id } }))
   return newOrg
 }

@@ -6,14 +6,18 @@ import { API, graphqlOperation } from 'aws-amplify';
 import _ from "lodash"
 import { Tag } from '../API';
 import * as mutations from '../graphql/mutations';
+import { DEFAULT_QUERY_FILTER } from './common';
 
 
 export function useTags() {
   // @ts-ignore
   const { data, refetch } = useQuery<Tag[]>(['tags', 'amplify'], async () => {
-    const tagsData = await API.graphql<any>(graphqlOperation(listTags))
-    const tags = tagsData.data.listTags.items.filter((tag: Tag) => tag._deleted !== true)
-    return tags
+    const tagsData = await API.graphql<any>(graphqlOperation(listTags, DEFAULT_QUERY_FILTER))
+    // console.log(tagsData)
+    // const tags = tagsData.data.listTags.items.filter((tag: Tag) => tag._deleted !== true)
+    // console.log({ tagsData, tags })
+
+    return tagsData.data.listTags.items
   }, {
     cacheTime: 0
   })
@@ -32,7 +36,7 @@ export async function createTag(name: string) {
   return newTag as Tag
 }
 
-export async function deleteTag({ id, _version }: Tag) {
-  const newTag = await API.graphql(graphqlOperation(mutations.deleteTag, { input: { id, _version } }))
+export async function deleteTag({ id }: Tag) {
+  const newTag = await API.graphql(graphqlOperation(mutations.deleteTag, { input: { id } }))
   return newTag
 }

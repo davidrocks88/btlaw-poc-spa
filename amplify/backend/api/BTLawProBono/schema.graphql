@@ -1,6 +1,7 @@
 type Tag @model @auth(rules: [{ allow: public }]) {
   id: ID!
   name: String!
+  _deleted: Boolean
   organizations: [Organization] @manyToMany(relationName: "OrganizationTag")
 }
 
@@ -16,7 +17,8 @@ type Organization @model @auth(rules: [{ allow: public }]) {
   trainingInformation: String
   areasServed: String
   orgUrl: String
-  Tags: [Tag] @manyToMany(relationName: "OrganizationTag")
+  _deleted: Boolean
+  tags: [Tag] @manyToMany(relationName: "OrganizationTag")
 }
 
 type SomethingA @model @auth(rules: [{ allow: public }]) {

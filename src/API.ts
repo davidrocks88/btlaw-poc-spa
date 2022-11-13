@@ -5,11 +5,12 @@
 export type CreateTagInput = {
   id?: string | null,
   name: string,
-  _version?: number | null,
+  _deleted?: boolean | null,
 };
 
 export type ModelTagConditionInput = {
   name?: ModelStringInput | null,
+  _deleted?: ModelBooleanInput | null,
   and?: Array< ModelTagConditionInput | null > | null,
   or?: Array< ModelTagConditionInput | null > | null,
   not?: ModelTagConditionInput | null,
@@ -55,23 +56,27 @@ export type ModelSizeInput = {
   between?: Array< number | null > | null,
 };
 
+export type ModelBooleanInput = {
+  ne?: boolean | null,
+  eq?: boolean | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+};
+
 export type Tag = {
   __typename: "Tag",
   id: string,
   name: string,
+  _deleted?: boolean | null,
   organizations?: ModelOrganizationTagConnection | null,
   createdAt: string,
   updatedAt: string,
-  _version: number,
-  _deleted?: boolean | null,
-  _lastChangedAt: number,
 };
 
 export type ModelOrganizationTagConnection = {
   __typename: "ModelOrganizationTagConnection",
   items:  Array<OrganizationTag | null >,
   nextToken?: string | null,
-  startedAt?: number | null,
 };
 
 export type OrganizationTag = {
@@ -83,9 +88,6 @@ export type OrganizationTag = {
   organization: Organization,
   createdAt: string,
   updatedAt: string,
-  _version: number,
-  _deleted?: boolean | null,
-  _lastChangedAt: number,
 };
 
 export type Organization = {
@@ -101,23 +103,20 @@ export type Organization = {
   trainingInformation?: string | null,
   areasServed?: string | null,
   orgUrl?: string | null,
-  Tags?: ModelOrganizationTagConnection | null,
+  _deleted?: boolean | null,
+  tags?: ModelOrganizationTagConnection | null,
   createdAt: string,
   updatedAt: string,
-  _version: number,
-  _deleted?: boolean | null,
-  _lastChangedAt: number,
 };
 
 export type UpdateTagInput = {
   id: string,
   name?: string | null,
-  _version?: number | null,
+  _deleted?: boolean | null,
 };
 
 export type DeleteTagInput = {
   id: string,
-  _version?: number | null,
 };
 
 export type CreateOrganizationInput = {
@@ -132,7 +131,7 @@ export type CreateOrganizationInput = {
   trainingInformation?: string | null,
   areasServed?: string | null,
   orgUrl?: string | null,
-  _version?: number | null,
+  _deleted?: boolean | null,
 };
 
 export type ModelOrganizationConditionInput = {
@@ -146,6 +145,7 @@ export type ModelOrganizationConditionInput = {
   trainingInformation?: ModelStringInput | null,
   areasServed?: ModelStringInput | null,
   orgUrl?: ModelStringInput | null,
+  _deleted?: ModelBooleanInput | null,
   and?: Array< ModelOrganizationConditionInput | null > | null,
   or?: Array< ModelOrganizationConditionInput | null > | null,
   not?: ModelOrganizationConditionInput | null,
@@ -163,18 +163,16 @@ export type UpdateOrganizationInput = {
   trainingInformation?: string | null,
   areasServed?: string | null,
   orgUrl?: string | null,
-  _version?: number | null,
+  _deleted?: boolean | null,
 };
 
 export type DeleteOrganizationInput = {
   id: string,
-  _version?: number | null,
 };
 
 export type CreateSomethingAInput = {
   id?: string | null,
   name: string,
-  _version?: number | null,
 };
 
 export type ModelSomethingAConditionInput = {
@@ -191,16 +189,12 @@ export type SomethingA = {
   somethingBs?: ModelSomethingASomethingBConnection | null,
   createdAt: string,
   updatedAt: string,
-  _version: number,
-  _deleted?: boolean | null,
-  _lastChangedAt: number,
 };
 
 export type ModelSomethingASomethingBConnection = {
   __typename: "ModelSomethingASomethingBConnection",
   items:  Array<SomethingASomethingB | null >,
   nextToken?: string | null,
-  startedAt?: number | null,
 };
 
 export type SomethingASomethingB = {
@@ -212,9 +206,6 @@ export type SomethingASomethingB = {
   somethingB: SomethingB,
   createdAt: string,
   updatedAt: string,
-  _version: number,
-  _deleted?: boolean | null,
-  _lastChangedAt: number,
 };
 
 export type SomethingB = {
@@ -225,27 +216,21 @@ export type SomethingB = {
   somethingAs?: ModelSomethingASomethingBConnection | null,
   createdAt: string,
   updatedAt: string,
-  _version: number,
-  _deleted?: boolean | null,
-  _lastChangedAt: number,
 };
 
 export type UpdateSomethingAInput = {
   id: string,
   name?: string | null,
-  _version?: number | null,
 };
 
 export type DeleteSomethingAInput = {
   id: string,
-  _version?: number | null,
 };
 
 export type CreateSomethingBInput = {
   id?: string | null,
   name: string,
   description?: string | null,
-  _version?: number | null,
 };
 
 export type ModelSomethingBConditionInput = {
@@ -260,19 +245,16 @@ export type UpdateSomethingBInput = {
   id: string,
   name?: string | null,
   description?: string | null,
-  _version?: number | null,
 };
 
 export type DeleteSomethingBInput = {
   id: string,
-  _version?: number | null,
 };
 
 export type CreateOrganizationTagInput = {
   id?: string | null,
   tagID: string,
   organizationID: string,
-  _version?: number | null,
 };
 
 export type ModelOrganizationTagConditionInput = {
@@ -303,19 +285,16 @@ export type UpdateOrganizationTagInput = {
   id: string,
   tagID?: string | null,
   organizationID?: string | null,
-  _version?: number | null,
 };
 
 export type DeleteOrganizationTagInput = {
   id: string,
-  _version?: number | null,
 };
 
 export type CreateSomethingASomethingBInput = {
   id?: string | null,
   somethingAID: string,
   somethingBID: string,
-  _version?: number | null,
 };
 
 export type ModelSomethingASomethingBConditionInput = {
@@ -330,17 +309,16 @@ export type UpdateSomethingASomethingBInput = {
   id: string,
   somethingAID?: string | null,
   somethingBID?: string | null,
-  _version?: number | null,
 };
 
 export type DeleteSomethingASomethingBInput = {
   id: string,
-  _version?: number | null,
 };
 
 export type ModelTagFilterInput = {
   id?: ModelIDInput | null,
   name?: ModelStringInput | null,
+  _deleted?: ModelBooleanInput | null,
   and?: Array< ModelTagFilterInput | null > | null,
   or?: Array< ModelTagFilterInput | null > | null,
   not?: ModelTagFilterInput | null,
@@ -350,7 +328,6 @@ export type ModelTagConnection = {
   __typename: "ModelTagConnection",
   items:  Array<Tag | null >,
   nextToken?: string | null,
-  startedAt?: number | null,
 };
 
 export type ModelOrganizationFilterInput = {
@@ -365,6 +342,7 @@ export type ModelOrganizationFilterInput = {
   trainingInformation?: ModelStringInput | null,
   areasServed?: ModelStringInput | null,
   orgUrl?: ModelStringInput | null,
+  _deleted?: ModelBooleanInput | null,
   and?: Array< ModelOrganizationFilterInput | null > | null,
   or?: Array< ModelOrganizationFilterInput | null > | null,
   not?: ModelOrganizationFilterInput | null,
@@ -374,7 +352,6 @@ export type ModelOrganizationConnection = {
   __typename: "ModelOrganizationConnection",
   items:  Array<Organization | null >,
   nextToken?: string | null,
-  startedAt?: number | null,
 };
 
 export type ModelSomethingAFilterInput = {
@@ -389,7 +366,6 @@ export type ModelSomethingAConnection = {
   __typename: "ModelSomethingAConnection",
   items:  Array<SomethingA | null >,
   nextToken?: string | null,
-  startedAt?: number | null,
 };
 
 export type ModelSomethingBFilterInput = {
@@ -405,7 +381,6 @@ export type ModelSomethingBConnection = {
   __typename: "ModelSomethingBConnection",
   items:  Array<SomethingB | null >,
   nextToken?: string | null,
-  startedAt?: number | null,
 };
 
 export type ModelOrganizationTagFilterInput = {
@@ -436,16 +411,13 @@ export type CreateTagMutation = {
     __typename: "Tag",
     id: string,
     name: string,
+    _deleted?: boolean | null,
     organizations?:  {
       __typename: "ModelOrganizationTagConnection",
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -459,16 +431,13 @@ export type UpdateTagMutation = {
     __typename: "Tag",
     id: string,
     name: string,
+    _deleted?: boolean | null,
     organizations?:  {
       __typename: "ModelOrganizationTagConnection",
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -482,16 +451,13 @@ export type DeleteTagMutation = {
     __typename: "Tag",
     id: string,
     name: string,
+    _deleted?: boolean | null,
     organizations?:  {
       __typename: "ModelOrganizationTagConnection",
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -514,16 +480,13 @@ export type CreateOrganizationMutation = {
     trainingInformation?: string | null,
     areasServed?: string | null,
     orgUrl?: string | null,
-    Tags?:  {
+    _deleted?: boolean | null,
+    tags?:  {
       __typename: "ModelOrganizationTagConnection",
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -546,16 +509,13 @@ export type UpdateOrganizationMutation = {
     trainingInformation?: string | null,
     areasServed?: string | null,
     orgUrl?: string | null,
-    Tags?:  {
+    _deleted?: boolean | null,
+    tags?:  {
       __typename: "ModelOrganizationTagConnection",
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -578,16 +538,13 @@ export type DeleteOrganizationMutation = {
     trainingInformation?: string | null,
     areasServed?: string | null,
     orgUrl?: string | null,
-    Tags?:  {
+    _deleted?: boolean | null,
+    tags?:  {
       __typename: "ModelOrganizationTagConnection",
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -604,13 +561,9 @@ export type CreateSomethingAMutation = {
     somethingBs?:  {
       __typename: "ModelSomethingASomethingBConnection",
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -627,13 +580,9 @@ export type UpdateSomethingAMutation = {
     somethingBs?:  {
       __typename: "ModelSomethingASomethingBConnection",
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -650,13 +599,9 @@ export type DeleteSomethingAMutation = {
     somethingBs?:  {
       __typename: "ModelSomethingASomethingBConnection",
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -674,13 +619,9 @@ export type CreateSomethingBMutation = {
     somethingAs?:  {
       __typename: "ModelSomethingASomethingBConnection",
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -698,13 +639,9 @@ export type UpdateSomethingBMutation = {
     somethingAs?:  {
       __typename: "ModelSomethingASomethingBConnection",
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -722,13 +659,9 @@ export type DeleteSomethingBMutation = {
     somethingAs?:  {
       __typename: "ModelSomethingASomethingBConnection",
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -747,11 +680,9 @@ export type CreateOrganizationTagMutation = {
       __typename: "Tag",
       id: string,
       name: string,
+      _deleted?: boolean | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     },
     organization:  {
       __typename: "Organization",
@@ -766,17 +697,12 @@ export type CreateOrganizationTagMutation = {
       trainingInformation?: string | null,
       areasServed?: string | null,
       orgUrl?: string | null,
+      _deleted?: boolean | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     },
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -795,11 +721,9 @@ export type UpdateOrganizationTagMutation = {
       __typename: "Tag",
       id: string,
       name: string,
+      _deleted?: boolean | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     },
     organization:  {
       __typename: "Organization",
@@ -814,17 +738,12 @@ export type UpdateOrganizationTagMutation = {
       trainingInformation?: string | null,
       areasServed?: string | null,
       orgUrl?: string | null,
+      _deleted?: boolean | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     },
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -843,11 +762,9 @@ export type DeleteOrganizationTagMutation = {
       __typename: "Tag",
       id: string,
       name: string,
+      _deleted?: boolean | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     },
     organization:  {
       __typename: "Organization",
@@ -862,17 +779,12 @@ export type DeleteOrganizationTagMutation = {
       trainingInformation?: string | null,
       areasServed?: string | null,
       orgUrl?: string | null,
+      _deleted?: boolean | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     },
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -893,9 +805,6 @@ export type CreateSomethingASomethingBMutation = {
       name: string,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     },
     somethingB:  {
       __typename: "SomethingB",
@@ -904,15 +813,9 @@ export type CreateSomethingASomethingBMutation = {
       description?: string | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     },
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -933,9 +836,6 @@ export type UpdateSomethingASomethingBMutation = {
       name: string,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     },
     somethingB:  {
       __typename: "SomethingB",
@@ -944,15 +844,9 @@ export type UpdateSomethingASomethingBMutation = {
       description?: string | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     },
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -973,9 +867,6 @@ export type DeleteSomethingASomethingBMutation = {
       name: string,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     },
     somethingB:  {
       __typename: "SomethingB",
@@ -984,15 +875,9 @@ export type DeleteSomethingASomethingBMutation = {
       description?: string | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     },
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -1005,16 +890,13 @@ export type GetTagQuery = {
     __typename: "Tag",
     id: string,
     name: string,
+    _deleted?: boolean | null,
     organizations?:  {
       __typename: "ModelOrganizationTagConnection",
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -1031,39 +913,11 @@ export type ListTagsQuery = {
       __typename: "Tag",
       id: string,
       name: string,
+      _deleted?: boolean | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null >,
     nextToken?: string | null,
-    startedAt?: number | null,
-  } | null,
-};
-
-export type SyncTagsQueryVariables = {
-  filter?: ModelTagFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-  lastSync?: number | null,
-};
-
-export type SyncTagsQuery = {
-  syncTags?:  {
-    __typename: "ModelTagConnection",
-    items:  Array< {
-      __typename: "Tag",
-      id: string,
-      name: string,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-    } | null >,
-    nextToken?: string | null,
-    startedAt?: number | null,
   } | null,
 };
 
@@ -1085,16 +939,13 @@ export type GetOrganizationQuery = {
     trainingInformation?: string | null,
     areasServed?: string | null,
     orgUrl?: string | null,
-    Tags?:  {
+    _deleted?: boolean | null,
+    tags?:  {
       __typename: "ModelOrganizationTagConnection",
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -1120,48 +971,11 @@ export type ListOrganizationsQuery = {
       trainingInformation?: string | null,
       areasServed?: string | null,
       orgUrl?: string | null,
+      _deleted?: boolean | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null >,
     nextToken?: string | null,
-    startedAt?: number | null,
-  } | null,
-};
-
-export type SyncOrganizationsQueryVariables = {
-  filter?: ModelOrganizationFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-  lastSync?: number | null,
-};
-
-export type SyncOrganizationsQuery = {
-  syncOrganizations?:  {
-    __typename: "ModelOrganizationConnection",
-    items:  Array< {
-      __typename: "Organization",
-      id: string,
-      name: string,
-      description?: string | null,
-      btContactName?: string | null,
-      volunteerContactName?: string | null,
-      volunteerContactEmail?: string | null,
-      volunteerContactPhone?: string | null,
-      volunteerUrl?: string | null,
-      trainingInformation?: string | null,
-      areasServed?: string | null,
-      orgUrl?: string | null,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-    } | null >,
-    nextToken?: string | null,
-    startedAt?: number | null,
   } | null,
 };
 
@@ -1177,13 +991,9 @@ export type GetSomethingAQuery = {
     somethingBs?:  {
       __typename: "ModelSomethingASomethingBConnection",
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -1202,37 +1012,8 @@ export type ListSomethingASQuery = {
       name: string,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null >,
     nextToken?: string | null,
-    startedAt?: number | null,
-  } | null,
-};
-
-export type SyncSomethingASQueryVariables = {
-  filter?: ModelSomethingAFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-  lastSync?: number | null,
-};
-
-export type SyncSomethingASQuery = {
-  syncSomethingAS?:  {
-    __typename: "ModelSomethingAConnection",
-    items:  Array< {
-      __typename: "SomethingA",
-      id: string,
-      name: string,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-    } | null >,
-    nextToken?: string | null,
-    startedAt?: number | null,
   } | null,
 };
 
@@ -1249,13 +1030,9 @@ export type GetSomethingBQuery = {
     somethingAs?:  {
       __typename: "ModelSomethingASomethingBConnection",
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -1275,38 +1052,8 @@ export type ListSomethingBSQuery = {
       description?: string | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null >,
     nextToken?: string | null,
-    startedAt?: number | null,
-  } | null,
-};
-
-export type SyncSomethingBSQueryVariables = {
-  filter?: ModelSomethingBFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-  lastSync?: number | null,
-};
-
-export type SyncSomethingBSQuery = {
-  syncSomethingBS?:  {
-    __typename: "ModelSomethingBConnection",
-    items:  Array< {
-      __typename: "SomethingB",
-      id: string,
-      name: string,
-      description?: string | null,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-    } | null >,
-    nextToken?: string | null,
-    startedAt?: number | null,
   } | null,
 };
 
@@ -1324,11 +1071,9 @@ export type GetOrganizationTagQuery = {
       __typename: "Tag",
       id: string,
       name: string,
+      _deleted?: boolean | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     },
     organization:  {
       __typename: "Organization",
@@ -1343,17 +1088,12 @@ export type GetOrganizationTagQuery = {
       trainingInformation?: string | null,
       areasServed?: string | null,
       orgUrl?: string | null,
+      _deleted?: boolean | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     },
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -1373,38 +1113,8 @@ export type ListOrganizationTagsQuery = {
       organizationID: string,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null >,
     nextToken?: string | null,
-    startedAt?: number | null,
-  } | null,
-};
-
-export type SyncOrganizationTagsQueryVariables = {
-  filter?: ModelOrganizationTagFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-  lastSync?: number | null,
-};
-
-export type SyncOrganizationTagsQuery = {
-  syncOrganizationTags?:  {
-    __typename: "ModelOrganizationTagConnection",
-    items:  Array< {
-      __typename: "OrganizationTag",
-      id: string,
-      tagID: string,
-      organizationID: string,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-    } | null >,
-    nextToken?: string | null,
-    startedAt?: number | null,
   } | null,
 };
 
@@ -1424,9 +1134,6 @@ export type GetSomethingASomethingBQuery = {
       name: string,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     },
     somethingB:  {
       __typename: "SomethingB",
@@ -1435,15 +1142,9 @@ export type GetSomethingASomethingBQuery = {
       description?: string | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     },
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -1463,38 +1164,8 @@ export type ListSomethingASomethingBSQuery = {
       somethingBID: string,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null >,
     nextToken?: string | null,
-    startedAt?: number | null,
-  } | null,
-};
-
-export type SyncSomethingASomethingBSQueryVariables = {
-  filter?: ModelSomethingASomethingBFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-  lastSync?: number | null,
-};
-
-export type SyncSomethingASomethingBSQuery = {
-  syncSomethingASomethingBS?:  {
-    __typename: "ModelSomethingASomethingBConnection",
-    items:  Array< {
-      __typename: "SomethingASomethingB",
-      id: string,
-      somethingAID: string,
-      somethingBID: string,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-    } | null >,
-    nextToken?: string | null,
-    startedAt?: number | null,
   } | null,
 };
 
@@ -1503,16 +1174,13 @@ export type OnCreateTagSubscription = {
     __typename: "Tag",
     id: string,
     name: string,
+    _deleted?: boolean | null,
     organizations?:  {
       __typename: "ModelOrganizationTagConnection",
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -1521,16 +1189,13 @@ export type OnUpdateTagSubscription = {
     __typename: "Tag",
     id: string,
     name: string,
+    _deleted?: boolean | null,
     organizations?:  {
       __typename: "ModelOrganizationTagConnection",
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -1539,16 +1204,13 @@ export type OnDeleteTagSubscription = {
     __typename: "Tag",
     id: string,
     name: string,
+    _deleted?: boolean | null,
     organizations?:  {
       __typename: "ModelOrganizationTagConnection",
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -1566,16 +1228,13 @@ export type OnCreateOrganizationSubscription = {
     trainingInformation?: string | null,
     areasServed?: string | null,
     orgUrl?: string | null,
-    Tags?:  {
+    _deleted?: boolean | null,
+    tags?:  {
       __typename: "ModelOrganizationTagConnection",
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -1593,16 +1252,13 @@ export type OnUpdateOrganizationSubscription = {
     trainingInformation?: string | null,
     areasServed?: string | null,
     orgUrl?: string | null,
-    Tags?:  {
+    _deleted?: boolean | null,
+    tags?:  {
       __typename: "ModelOrganizationTagConnection",
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -1620,16 +1276,13 @@ export type OnDeleteOrganizationSubscription = {
     trainingInformation?: string | null,
     areasServed?: string | null,
     orgUrl?: string | null,
-    Tags?:  {
+    _deleted?: boolean | null,
+    tags?:  {
       __typename: "ModelOrganizationTagConnection",
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -1641,13 +1294,9 @@ export type OnCreateSomethingASubscription = {
     somethingBs?:  {
       __typename: "ModelSomethingASomethingBConnection",
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -1659,13 +1308,9 @@ export type OnUpdateSomethingASubscription = {
     somethingBs?:  {
       __typename: "ModelSomethingASomethingBConnection",
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -1677,13 +1322,9 @@ export type OnDeleteSomethingASubscription = {
     somethingBs?:  {
       __typename: "ModelSomethingASomethingBConnection",
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -1696,13 +1337,9 @@ export type OnCreateSomethingBSubscription = {
     somethingAs?:  {
       __typename: "ModelSomethingASomethingBConnection",
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -1715,13 +1352,9 @@ export type OnUpdateSomethingBSubscription = {
     somethingAs?:  {
       __typename: "ModelSomethingASomethingBConnection",
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -1734,13 +1367,9 @@ export type OnDeleteSomethingBSubscription = {
     somethingAs?:  {
       __typename: "ModelSomethingASomethingBConnection",
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -1754,11 +1383,9 @@ export type OnCreateOrganizationTagSubscription = {
       __typename: "Tag",
       id: string,
       name: string,
+      _deleted?: boolean | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     },
     organization:  {
       __typename: "Organization",
@@ -1773,17 +1400,12 @@ export type OnCreateOrganizationTagSubscription = {
       trainingInformation?: string | null,
       areasServed?: string | null,
       orgUrl?: string | null,
+      _deleted?: boolean | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     },
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -1797,11 +1419,9 @@ export type OnUpdateOrganizationTagSubscription = {
       __typename: "Tag",
       id: string,
       name: string,
+      _deleted?: boolean | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     },
     organization:  {
       __typename: "Organization",
@@ -1816,17 +1436,12 @@ export type OnUpdateOrganizationTagSubscription = {
       trainingInformation?: string | null,
       areasServed?: string | null,
       orgUrl?: string | null,
+      _deleted?: boolean | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     },
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -1840,11 +1455,9 @@ export type OnDeleteOrganizationTagSubscription = {
       __typename: "Tag",
       id: string,
       name: string,
+      _deleted?: boolean | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     },
     organization:  {
       __typename: "Organization",
@@ -1859,17 +1472,12 @@ export type OnDeleteOrganizationTagSubscription = {
       trainingInformation?: string | null,
       areasServed?: string | null,
       orgUrl?: string | null,
+      _deleted?: boolean | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     },
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -1885,9 +1493,6 @@ export type OnCreateSomethingASomethingBSubscription = {
       name: string,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     },
     somethingB:  {
       __typename: "SomethingB",
@@ -1896,15 +1501,9 @@ export type OnCreateSomethingASomethingBSubscription = {
       description?: string | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     },
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -1920,9 +1519,6 @@ export type OnUpdateSomethingASomethingBSubscription = {
       name: string,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     },
     somethingB:  {
       __typename: "SomethingB",
@@ -1931,15 +1527,9 @@ export type OnUpdateSomethingASomethingBSubscription = {
       description?: string | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     },
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -1955,9 +1545,6 @@ export type OnDeleteSomethingASomethingBSubscription = {
       name: string,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     },
     somethingB:  {
       __typename: "SomethingB",
@@ -1966,14 +1553,8 @@ export type OnDeleteSomethingASomethingBSubscription = {
       description?: string | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     },
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };

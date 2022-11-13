@@ -7,15 +7,12 @@ export const getTag = /* GraphQL */ `
     getTag(id: $id) {
       id
       name
+      _deleted
       organizations {
         nextToken
-        startedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -29,41 +26,11 @@ export const listTags = /* GraphQL */ `
       items {
         id
         name
+        _deleted
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       nextToken
-      startedAt
-    }
-  }
-`;
-export const syncTags = /* GraphQL */ `
-  query SyncTags(
-    $filter: ModelTagFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncTags(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        name
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
     }
   }
 `;
@@ -81,15 +48,12 @@ export const getOrganization = /* GraphQL */ `
       trainingInformation
       areasServed
       orgUrl
-      Tags {
+      _deleted
+      tags {
         nextToken
-        startedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -112,50 +76,11 @@ export const listOrganizations = /* GraphQL */ `
         trainingInformation
         areasServed
         orgUrl
+        _deleted
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       nextToken
-      startedAt
-    }
-  }
-`;
-export const syncOrganizations = /* GraphQL */ `
-  query SyncOrganizations(
-    $filter: ModelOrganizationFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncOrganizations(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        name
-        description
-        btContactName
-        volunteerContactName
-        volunteerContactEmail
-        volunteerContactPhone
-        volunteerUrl
-        trainingInformation
-        areasServed
-        orgUrl
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
     }
   }
 `;
@@ -166,13 +91,9 @@ export const getSomethingA = /* GraphQL */ `
       name
       somethingBs {
         nextToken
-        startedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -188,39 +109,8 @@ export const listSomethingAS = /* GraphQL */ `
         name
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       nextToken
-      startedAt
-    }
-  }
-`;
-export const syncSomethingAS = /* GraphQL */ `
-  query SyncSomethingAS(
-    $filter: ModelSomethingAFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncSomethingAS(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        name
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
     }
   }
 `;
@@ -232,13 +122,9 @@ export const getSomethingB = /* GraphQL */ `
       description
       somethingAs {
         nextToken
-        startedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -255,40 +141,8 @@ export const listSomethingBS = /* GraphQL */ `
         description
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       nextToken
-      startedAt
-    }
-  }
-`;
-export const syncSomethingBS = /* GraphQL */ `
-  query SyncSomethingBS(
-    $filter: ModelSomethingBFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncSomethingBS(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        name
-        description
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
     }
   }
 `;
@@ -301,11 +155,9 @@ export const getOrganizationTag = /* GraphQL */ `
       tag {
         id
         name
+        _deleted
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       organization {
         id
@@ -319,17 +171,12 @@ export const getOrganizationTag = /* GraphQL */ `
         trainingInformation
         areasServed
         orgUrl
+        _deleted
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -350,40 +197,8 @@ export const listOrganizationTags = /* GraphQL */ `
         organizationID
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       nextToken
-      startedAt
-    }
-  }
-`;
-export const syncOrganizationTags = /* GraphQL */ `
-  query SyncOrganizationTags(
-    $filter: ModelOrganizationTagFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncOrganizationTags(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        tagID
-        organizationID
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
     }
   }
 `;
@@ -398,9 +213,6 @@ export const getSomethingASomethingB = /* GraphQL */ `
         name
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       somethingB {
         id
@@ -408,15 +220,9 @@ export const getSomethingASomethingB = /* GraphQL */ `
         description
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -437,40 +243,8 @@ export const listSomethingASomethingBS = /* GraphQL */ `
         somethingBID
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       nextToken
-      startedAt
-    }
-  }
-`;
-export const syncSomethingASomethingBS = /* GraphQL */ `
-  query SyncSomethingASomethingBS(
-    $filter: ModelSomethingASomethingBFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncSomethingASomethingBS(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        somethingAID
-        somethingBID
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
     }
   }
 `;

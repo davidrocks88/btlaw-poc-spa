@@ -7,15 +7,12 @@ export const onCreateTag = /* GraphQL */ `
     onCreateTag {
       id
       name
+      _deleted
       organizations {
         nextToken
-        startedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -24,15 +21,12 @@ export const onUpdateTag = /* GraphQL */ `
     onUpdateTag {
       id
       name
+      _deleted
       organizations {
         nextToken
-        startedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -41,15 +35,12 @@ export const onDeleteTag = /* GraphQL */ `
     onDeleteTag {
       id
       name
+      _deleted
       organizations {
         nextToken
-        startedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -67,15 +58,12 @@ export const onCreateOrganization = /* GraphQL */ `
       trainingInformation
       areasServed
       orgUrl
-      Tags {
+      _deleted
+      tags {
         nextToken
-        startedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -93,15 +81,12 @@ export const onUpdateOrganization = /* GraphQL */ `
       trainingInformation
       areasServed
       orgUrl
-      Tags {
+      _deleted
+      tags {
         nextToken
-        startedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -119,15 +104,12 @@ export const onDeleteOrganization = /* GraphQL */ `
       trainingInformation
       areasServed
       orgUrl
-      Tags {
+      _deleted
+      tags {
         nextToken
-        startedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -138,13 +120,9 @@ export const onCreateSomethingA = /* GraphQL */ `
       name
       somethingBs {
         nextToken
-        startedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -155,13 +133,9 @@ export const onUpdateSomethingA = /* GraphQL */ `
       name
       somethingBs {
         nextToken
-        startedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -172,13 +146,9 @@ export const onDeleteSomethingA = /* GraphQL */ `
       name
       somethingBs {
         nextToken
-        startedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -190,13 +160,9 @@ export const onCreateSomethingB = /* GraphQL */ `
       description
       somethingAs {
         nextToken
-        startedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -208,13 +174,9 @@ export const onUpdateSomethingB = /* GraphQL */ `
       description
       somethingAs {
         nextToken
-        startedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -226,13 +188,9 @@ export const onDeleteSomethingB = /* GraphQL */ `
       description
       somethingAs {
         nextToken
-        startedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -245,11 +203,9 @@ export const onCreateOrganizationTag = /* GraphQL */ `
       tag {
         id
         name
+        _deleted
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       organization {
         id
@@ -263,17 +219,12 @@ export const onCreateOrganizationTag = /* GraphQL */ `
         trainingInformation
         areasServed
         orgUrl
+        _deleted
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -286,11 +237,9 @@ export const onUpdateOrganizationTag = /* GraphQL */ `
       tag {
         id
         name
+        _deleted
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       organization {
         id
@@ -304,17 +253,12 @@ export const onUpdateOrganizationTag = /* GraphQL */ `
         trainingInformation
         areasServed
         orgUrl
+        _deleted
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -327,11 +271,9 @@ export const onDeleteOrganizationTag = /* GraphQL */ `
       tag {
         id
         name
+        _deleted
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       organization {
         id
@@ -345,17 +287,12 @@ export const onDeleteOrganizationTag = /* GraphQL */ `
         trainingInformation
         areasServed
         orgUrl
+        _deleted
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -370,9 +307,6 @@ export const onCreateSomethingASomethingB = /* GraphQL */ `
         name
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       somethingB {
         id
@@ -380,15 +314,9 @@ export const onCreateSomethingASomethingB = /* GraphQL */ `
         description
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -403,9 +331,6 @@ export const onUpdateSomethingASomethingB = /* GraphQL */ `
         name
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       somethingB {
         id
@@ -413,15 +338,9 @@ export const onUpdateSomethingASomethingB = /* GraphQL */ `
         description
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -436,9 +355,6 @@ export const onDeleteSomethingASomethingB = /* GraphQL */ `
         name
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       somethingB {
         id
@@ -446,15 +362,9 @@ export const onDeleteSomethingASomethingB = /* GraphQL */ `
         description
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;

@@ -1,4 +1,4 @@
-import { IOrganization, OrganizationProps } from "./Organization";
+import { IOrganization } from "./Organization";
 import { useNavigate, useParams } from "react-router-dom";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore

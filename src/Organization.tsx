@@ -3,9 +3,7 @@ import OrganizationModal from './OrganizationModal'
 import _ from "lodash";
 import EditIcon from "./edit-button-svgrepo-com.svg"
 import { toTitleCase } from './common';
-import { DataStore } from '@aws-amplify/datastore';
-import { Tag } from './models';
-import { Organization as OrganizationModel } from './API';
+import { useOrganization } from './amplifyHooks/useOrganization';
 
 export interface IOrganization {
   id: string
@@ -23,7 +21,7 @@ export interface IOrganization {
 }
 
 export interface OrganizationProps {
-  organization: OrganizationModel
+  organizationID: string
 }
 
 function getDescriptionTruncated(description: string) {
@@ -36,33 +34,14 @@ function getDescriptionTruncated(description: string) {
 }
 
 
-export function Organization({ organization }: OrganizationProps) {
+export function Organization({ organizationID }: OrganizationProps) {
   const [showModal, setshowModal] = useState<Boolean>(false)
+  const { organization, tags } = useOrganization(organizationID)
   const showEditButton = false
 
-  async function createItem() {
-    try {
-      await DataStore.save(
-        new Tag({
-          name: "temp",
-          organizations: []
-        })
-      );
-      console.log("Post saved successfully!");
-    } catch (error) {
-      console.log("Error saving post", error);
-    }
+  if (!organization) {
+    return <></>
   }
-
-  async function getItems() {
-    try {
-      const tags = await DataStore.query(Tag);
-      console.log("tags retrieved successfully!", JSON.stringify(tags, null, 2));
-    } catch (error) {
-      console.log("Error retrieving tags", error);
-    }
-  }
-
   return (
     <div className="w-96 m-4 p-4 flex flex-col rounded overflow-hidden shadow-lg" key={organization.name}>
       <div className='flex justify-between cursor-pointer'>
@@ -70,11 +49,11 @@ export function Organization({ organization }: OrganizationProps) {
 
       </div>
       <div className="flex flex-row flex-wrap">
-        {_.uniq(organization?.tags?.items.map(t => toTitleCase(t?.tag?.name ?? ''))).map(t => <div key={t} className="flex"><div className={`text-sm p-1 px-2 m-1 border-2 rounded-full inline-block bg-gray-200`}>{t}</div>
+        {_.uniq(tags).map(t => <div key={`${organizationID}-${t.id}`} className="flex"><div className={`text-sm p-1 px-2 m-1 border-2 rounded-full inline-block bg-gray-200`}>{toTitleCase(t.name ?? '')}</div>
         </div>)}
       </div>
-      {/* {showModal && <OrganizationModal organization={organization} hideModal={() => setshowModal(false)} />} */}
-      <div className="text-gray-700 text-base mb-2 overflow-hidden text-ellipsis">{getDescriptionTruncated(organization?.description ?? '')}</div>
+      {showModal && <OrganizationModal organizationID={organizationID} hideModal={() => setshowModal(false)} />}
+      <div className="text-gray-700 text-base mb-2 overflow-hidden text-ellipsis">{getDescriptionTruncated(organization.description ?? '')}</div>
       <div className="grow"></div>
       <div className="flex flex-row justify-between">
         <button onClick={() => setshowModal(true)} className="w-42 bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">
@@ -85,8 +64,6 @@ export function Organization({ organization }: OrganizationProps) {
         <a href={`${organization.volunteerUrl ? organization.volunteerUrl : `mailto:${organization.volunteerContactEmail}`}`} target="_blank" rel="noreferrer"><button className="w-42 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
           Volunteer Now
         </button></a>
-        <button onClick={createItem}>Click</button>
-        <button onClick={getItems}>Click2</button>
       </div>
 
     </div>

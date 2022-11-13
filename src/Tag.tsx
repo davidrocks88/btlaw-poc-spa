@@ -1,15 +1,17 @@
+import { Tag as TagModel } from "./API"
+
 export interface TagProps {
-  name: string
-  handleClick: (name: string, value: Boolean) => void
-  filters?: any
+  tag: TagModel
+  handleClick: (tag: TagModel, value: Boolean) => void
+  filters?: { [tagID: string]: Boolean }
 }
 
-export function Tag({ name, handleClick, filters }: TagProps) {
+export function Tag({ tag, handleClick, filters = {} }: TagProps) {
   function click() {
-    handleClick(name, !filters[name])
+    handleClick(tag, !filters[tag.id])
   }
 
   return (
-    <div key={name} className={`cursor-pointer text-sm p-1 px-2 m-1 rounded-full inline hover:bg-gray-300 ${filters[name] ? 'bg-gray-400' : 'bg-gray-200'}`} onClick={click}>{name}</div>
+    <div key={tag.name} className={`cursor-pointer text-sm p-1 px-2 m-1 rounded-full inline hover:bg-gray-300 ${filters[tag.id] ? 'bg-gray-400' : 'bg-gray-200'}`} onClick={click}>{tag.name}</div>
   )
 }

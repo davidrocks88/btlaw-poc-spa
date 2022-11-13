@@ -4,7 +4,8 @@ import { useOrganizationList as useAmplifyOrganizationList } from "./amplifyHook
 import { useTags as useAmplifyTags, createTag, deleteTag } from "./amplifyHooks/useTags"
 import { createOrganization, deleteOrganization, deleteOrganizationTag } from "./amplifyHooks/useOrganization"
 import { useOrganizationTagList } from "./amplifyHooks/useOrganizationTagList"
-import { ModelOrganizationTagConnection, Tag } from "./API"
+import { Tag } from "./API"
+
 export function Migration() {
   const { tags } = useTags()
   const { organizations } = useOrganizationList()

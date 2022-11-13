@@ -5,6 +5,8 @@ import { API, graphqlOperation } from 'aws-amplify';
 import { Organization, OrganizationTag, Tag } from '../API';
 import * as queries from '../graphql/queries';
 import * as mutations from '../graphql/mutations';
+import { useTags } from './useTags';
+import { useOrganizationTagList } from './useOrganizationTagList';
 
 
 export function useOrganization(id: string) {
@@ -19,9 +21,12 @@ export function useOrganization(id: string) {
     }
   )
 
+  const { tags } = useTags()
+  const { organizationTagList } = useOrganizationTagList()
   return {
     isLoading,
-    organization: data
+    organization: data,
+    tags: organizationTagList.filter(ot => ot.organizationID === data?.id).map(ot => tags.find(t => t.id === ot.tagID)).filter(t => t !== undefined) as Tag[]
   }
 }
 

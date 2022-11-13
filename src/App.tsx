@@ -4,27 +4,15 @@ import { Organization } from './Organization';
 import { Tag as TagComponent } from './Tag';
 import { useTags } from './amplifyHooks/useTags';
 import { useOrganizationList } from './amplifyHooks/useOrganizationList';
-import { useOrganizationTagList } from './amplifyHooks/useOrganizationTagList';
 import { Tag } from './API';
 
 export function App() {
   const { organizationList } = useOrganizationList()
-  const { organizationTagList } = useOrganizationTagList()
   const { tags } = useTags()
-  const [filters, setFilters] = useState<any>({})
   const [searchString, setSearchString] = useState<string>('')
   const [selectedTags, setSelectedTags] = useState<{
     [tagId: string]: Boolean
   }>({})
-
-  console.log({ organizationList, organizationTagList })
-
-  function updateFilter(name: string, shouldFilter: Boolean) {
-    setFilters({
-      ...filters,
-      [name]: shouldFilter
-    })
-  }
 
   function selectTagFilter(tag: Tag, shouldFilter: Boolean) {
     setSelectedTags({
@@ -33,19 +21,18 @@ export function App() {
     })
   }
 
-  let areAllFalse = true
-
-  for (let filterVal of Object.values(filters)) {
-    areAllFalse = areAllFalse && filterVal === false
-  }
-
   let orgsToShow = organizationList
+  const someTagsAreSelected = Object.values(selectedTags).length > 0 && Object.values(selectedTags).includes(true)
+  if (someTagsAreSelected) {
+    // orgsToShow should be filtered
+    // filter predicate:
+    //  if any of the org.tags is in selectedTags, return true
+    // else, return false
 
-  if (Object.keys(filters).length > 0 && areAllFalse === false) {
-    orgsToShow = orgsToShow?.filter(org => {
-      const tags = organizationTagList?.filter(orgTag => orgTag.organizationID === org.id).map(orgTag => orgTag.tag)
+    orgsToShow = orgsToShow.filter(org => {
+      const tags = org.tags?.items ?? []
       for (let tag of tags) {
-        if (filters[tag.name] === true) {
+        if (tag && selectedTags[tag?.tagID]) {
           return true
         }
       }
@@ -87,13 +74,13 @@ export function App() {
         <div className='pt-2 flex flex-row flex-wrap gap-y-2 items-end align-middle content-center'>
           <div className='flex flex-col items-center justify-center content-center w-full'>
             <div className='font-bold text-red-700 text-xl'>TAGS</div>
-            <div className='cursor-pointer hover:bg-gray-200 rounded-full p-2 font-lg font-bold mb-[2px]' onClick={() => setFilters({})}>Reset</div>
+            <div className='cursor-pointer hover:bg-gray-200 rounded-full p-2 font-lg font-bold mb-[2px]' onClick={() => setSelectedTags({})}>Reset</div>
           </div>
-          {tags.map(t => <div key={t.name} className='mb-3'><TagComponent filters={filters} name={t.name} handleClick={updateFilter} /></div>)}
+          {tags.map(t => <div key={t.name} className='mb-3'><TagComponent tag={t} filters={selectedTags} handleClick={selectTagFilter} /></div>)}
         </div>
 
         <div className='col-span-6 flex flex-row flex-wrap'>
-          {orgsToShow?.sort((a, b) => (a.name < b.name ? -1 : 1)).map(org => <Organization organization={org} />)}
+          {orgsToShow?.sort((a, b) => (a.name < b.name ? -1 : 1)).map(org => <Organization key={org.id} organizationID={org.id} />)}
         </div>
       </div>
     </div>

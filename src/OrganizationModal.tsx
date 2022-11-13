@@ -1,12 +1,12 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { Fragment, useRef, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-import { IOrganization } from './Organization'
 import { Accordion } from './Accordion'
 import EditIcon from "./edit-button-svgrepo-com.svg"
+import { useOrganization } from './amplifyHooks/useOrganization'
 
 export interface OrganizationModalProps {
-  organization: IOrganization
+  organizationID: string,
   hideModal: () => void
 }
 
@@ -36,8 +36,9 @@ export interface OrganizationModalProps {
 //   </figure>)
 // }
 
-export default function OrganizationModal({ organization, hideModal }: OrganizationModalProps) {
+export default function OrganizationModal({ organizationID, hideModal }: OrganizationModalProps) {
   const [open, setOpenAggregate] = useState(true)
+  const { organization } = useOrganization(organizationID)
   const cancelButtonRef = useRef(null)
   const showEditButton = false
 
@@ -46,6 +47,10 @@ export default function OrganizationModal({ organization, hideModal }: Organizat
     if (isOpen === false) {
       hideModal()
     }
+  }
+
+  if (!organization) {
+    return <></>
   }
 
   return (
@@ -111,7 +116,7 @@ export default function OrganizationModal({ organization, hideModal }: Organizat
                     className="inline-flex w-full justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
                     onClick={() => setOpen(false)}
                   >
-                    <a href={organization.volunteerUrl} target='_blank' rel="noreferrer">
+                    <a href={organization.volunteerUrl ?? ''} target='_blank' rel="noreferrer">
                       Find Current Opportunities
                     </a>
                   </button>

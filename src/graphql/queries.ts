@@ -159,6 +159,139 @@ export const syncOrganizations = /* GraphQL */ `
     }
   }
 `;
+export const getSomethingA = /* GraphQL */ `
+  query GetSomethingA($id: ID!) {
+    getSomethingA(id: $id) {
+      id
+      name
+      somethingBs {
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const listSomethingAS = /* GraphQL */ `
+  query ListSomethingAS(
+    $filter: ModelSomethingAFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listSomethingAS(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        name
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncSomethingAS = /* GraphQL */ `
+  query SyncSomethingAS(
+    $filter: ModelSomethingAFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncSomethingAS(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        name
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const getSomethingB = /* GraphQL */ `
+  query GetSomethingB($id: ID!) {
+    getSomethingB(id: $id) {
+      id
+      name
+      description
+      somethingAs {
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const listSomethingBS = /* GraphQL */ `
+  query ListSomethingBS(
+    $filter: ModelSomethingBFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listSomethingBS(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        name
+        description
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncSomethingBS = /* GraphQL */ `
+  query SyncSomethingBS(
+    $filter: ModelSomethingBFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncSomethingBS(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        name
+        description
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
 export const getOrganizationTag = /* GraphQL */ `
   query GetOrganizationTag($id: ID!) {
     getOrganizationTag(id: $id) {
@@ -243,6 +376,93 @@ export const syncOrganizationTags = /* GraphQL */ `
         id
         tagID
         organizationID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const getSomethingASomethingB = /* GraphQL */ `
+  query GetSomethingASomethingB($id: ID!) {
+    getSomethingASomethingB(id: $id) {
+      id
+      somethingAID
+      somethingBID
+      somethingA {
+        id
+        name
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      somethingB {
+        id
+        name
+        description
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const listSomethingASomethingBS = /* GraphQL */ `
+  query ListSomethingASomethingBS(
+    $filter: ModelSomethingASomethingBFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listSomethingASomethingBS(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        somethingAID
+        somethingBID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncSomethingASomethingBS = /* GraphQL */ `
+  query SyncSomethingASomethingBS(
+    $filter: ModelSomethingASomethingBFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncSomethingASomethingBS(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        somethingAID
+        somethingBID
         createdAt
         updatedAt
         _version

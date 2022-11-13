@@ -26,16 +26,29 @@ export function useOrganization(id: string) {
 }
 
 export async function createOrganization(organization: Omit<Organization, 'id' | '__typename' | 'createdAt' | 'updatedAt' | '_version' | '_lastChangedAt'>) {
-  const newOrg = await API.graphql(graphqlOperation(mutations.createOrganization, { input: { ...organization } }))
-  return newOrg as Organization
+  const newOrgData: any = await API.graphql(graphqlOperation(mutations.createOrganization, { input: { ...organization } }))
+  const newOrg = newOrgData?.data.createOrganization as Organization
+
+  // Create tags
+  if (organization.Tags) {
+    for (const tag of organization.Tags?.items) {
+      if (tag) {
+        await API.graphql(graphqlOperation(mutations.createOrganizationTag, {
+          input: {
+            tagID: tag.id,
+            organizationID: newOrg
+          }
+        }))
+      }
+    }
+  }
+
+  console.log('created org:', newOrg.name)
+
+  return newOrg
 }
 
 export async function deleteOrganization({ id, _version }: Organization) {
   const newOrg = await API.graphql(graphqlOperation(mutations.deleteOrganization, { input: { id, _version } }))
   return newOrg
-}
-
-export async function createOrganizationTag(organizationID: string, tagID: string) {
-  const newOrgTag = await API.graphql(graphqlOperation(mutations.createOrganizationTag, { input: { organizationID, tagID } }))
-  return newOrgTag as OrganizationTag
 }

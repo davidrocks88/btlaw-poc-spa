@@ -131,6 +131,111 @@ export const onDeleteOrganization = /* GraphQL */ `
     }
   }
 `;
+export const onCreateSomethingA = /* GraphQL */ `
+  subscription OnCreateSomethingA {
+    onCreateSomethingA {
+      id
+      name
+      somethingBs {
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onUpdateSomethingA = /* GraphQL */ `
+  subscription OnUpdateSomethingA {
+    onUpdateSomethingA {
+      id
+      name
+      somethingBs {
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onDeleteSomethingA = /* GraphQL */ `
+  subscription OnDeleteSomethingA {
+    onDeleteSomethingA {
+      id
+      name
+      somethingBs {
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onCreateSomethingB = /* GraphQL */ `
+  subscription OnCreateSomethingB {
+    onCreateSomethingB {
+      id
+      name
+      description
+      somethingAs {
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onUpdateSomethingB = /* GraphQL */ `
+  subscription OnUpdateSomethingB {
+    onUpdateSomethingB {
+      id
+      name
+      description
+      somethingAs {
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onDeleteSomethingB = /* GraphQL */ `
+  subscription OnDeleteSomethingB {
+    onDeleteSomethingB {
+      id
+      name
+      description
+      somethingAs {
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
 export const onCreateOrganizationTag = /* GraphQL */ `
   subscription OnCreateOrganizationTag {
     onCreateOrganizationTag {
@@ -240,6 +345,105 @@ export const onDeleteOrganizationTag = /* GraphQL */ `
         trainingInformation
         areasServed
         orgUrl
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onCreateSomethingASomethingB = /* GraphQL */ `
+  subscription OnCreateSomethingASomethingB {
+    onCreateSomethingASomethingB {
+      id
+      somethingAID
+      somethingBID
+      somethingA {
+        id
+        name
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      somethingB {
+        id
+        name
+        description
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onUpdateSomethingASomethingB = /* GraphQL */ `
+  subscription OnUpdateSomethingASomethingB {
+    onUpdateSomethingASomethingB {
+      id
+      somethingAID
+      somethingBID
+      somethingA {
+        id
+        name
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      somethingB {
+        id
+        name
+        description
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onDeleteSomethingASomethingB = /* GraphQL */ `
+  subscription OnDeleteSomethingASomethingB {
+    onDeleteSomethingASomethingB {
+      id
+      somethingAID
+      somethingBID
+      somethingA {
+        id
+        name
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      somethingB {
+        id
+        name
+        description
         createdAt
         updatedAt
         _version

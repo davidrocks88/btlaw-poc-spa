@@ -171,6 +171,103 @@ export type DeleteOrganizationInput = {
   _version?: number | null,
 };
 
+export type CreateSomethingAInput = {
+  id?: string | null,
+  name: string,
+  _version?: number | null,
+};
+
+export type ModelSomethingAConditionInput = {
+  name?: ModelStringInput | null,
+  and?: Array< ModelSomethingAConditionInput | null > | null,
+  or?: Array< ModelSomethingAConditionInput | null > | null,
+  not?: ModelSomethingAConditionInput | null,
+};
+
+export type SomethingA = {
+  __typename: "SomethingA",
+  id: string,
+  name: string,
+  somethingBs?: ModelSomethingASomethingBConnection | null,
+  createdAt: string,
+  updatedAt: string,
+  _version: number,
+  _deleted?: boolean | null,
+  _lastChangedAt: number,
+};
+
+export type ModelSomethingASomethingBConnection = {
+  __typename: "ModelSomethingASomethingBConnection",
+  items:  Array<SomethingASomethingB | null >,
+  nextToken?: string | null,
+  startedAt?: number | null,
+};
+
+export type SomethingASomethingB = {
+  __typename: "SomethingASomethingB",
+  id: string,
+  somethingAID: string,
+  somethingBID: string,
+  somethingA: SomethingA,
+  somethingB: SomethingB,
+  createdAt: string,
+  updatedAt: string,
+  _version: number,
+  _deleted?: boolean | null,
+  _lastChangedAt: number,
+};
+
+export type SomethingB = {
+  __typename: "SomethingB",
+  id: string,
+  name: string,
+  description?: string | null,
+  somethingAs?: ModelSomethingASomethingBConnection | null,
+  createdAt: string,
+  updatedAt: string,
+  _version: number,
+  _deleted?: boolean | null,
+  _lastChangedAt: number,
+};
+
+export type UpdateSomethingAInput = {
+  id: string,
+  name?: string | null,
+  _version?: number | null,
+};
+
+export type DeleteSomethingAInput = {
+  id: string,
+  _version?: number | null,
+};
+
+export type CreateSomethingBInput = {
+  id?: string | null,
+  name: string,
+  description?: string | null,
+  _version?: number | null,
+};
+
+export type ModelSomethingBConditionInput = {
+  name?: ModelStringInput | null,
+  description?: ModelStringInput | null,
+  and?: Array< ModelSomethingBConditionInput | null > | null,
+  or?: Array< ModelSomethingBConditionInput | null > | null,
+  not?: ModelSomethingBConditionInput | null,
+};
+
+export type UpdateSomethingBInput = {
+  id: string,
+  name?: string | null,
+  description?: string | null,
+  _version?: number | null,
+};
+
+export type DeleteSomethingBInput = {
+  id: string,
+  _version?: number | null,
+};
+
 export type CreateOrganizationTagInput = {
   id?: string | null,
   tagID: string,
@@ -214,6 +311,33 @@ export type DeleteOrganizationTagInput = {
   _version?: number | null,
 };
 
+export type CreateSomethingASomethingBInput = {
+  id?: string | null,
+  somethingAID: string,
+  somethingBID: string,
+  _version?: number | null,
+};
+
+export type ModelSomethingASomethingBConditionInput = {
+  somethingAID?: ModelIDInput | null,
+  somethingBID?: ModelIDInput | null,
+  and?: Array< ModelSomethingASomethingBConditionInput | null > | null,
+  or?: Array< ModelSomethingASomethingBConditionInput | null > | null,
+  not?: ModelSomethingASomethingBConditionInput | null,
+};
+
+export type UpdateSomethingASomethingBInput = {
+  id: string,
+  somethingAID?: string | null,
+  somethingBID?: string | null,
+  _version?: number | null,
+};
+
+export type DeleteSomethingASomethingBInput = {
+  id: string,
+  _version?: number | null,
+};
+
 export type ModelTagFilterInput = {
   id?: ModelIDInput | null,
   name?: ModelStringInput | null,
@@ -253,6 +377,37 @@ export type ModelOrganizationConnection = {
   startedAt?: number | null,
 };
 
+export type ModelSomethingAFilterInput = {
+  id?: ModelIDInput | null,
+  name?: ModelStringInput | null,
+  and?: Array< ModelSomethingAFilterInput | null > | null,
+  or?: Array< ModelSomethingAFilterInput | null > | null,
+  not?: ModelSomethingAFilterInput | null,
+};
+
+export type ModelSomethingAConnection = {
+  __typename: "ModelSomethingAConnection",
+  items:  Array<SomethingA | null >,
+  nextToken?: string | null,
+  startedAt?: number | null,
+};
+
+export type ModelSomethingBFilterInput = {
+  id?: ModelIDInput | null,
+  name?: ModelStringInput | null,
+  description?: ModelStringInput | null,
+  and?: Array< ModelSomethingBFilterInput | null > | null,
+  or?: Array< ModelSomethingBFilterInput | null > | null,
+  not?: ModelSomethingBFilterInput | null,
+};
+
+export type ModelSomethingBConnection = {
+  __typename: "ModelSomethingBConnection",
+  items:  Array<SomethingB | null >,
+  nextToken?: string | null,
+  startedAt?: number | null,
+};
+
 export type ModelOrganizationTagFilterInput = {
   id?: ModelIDInput | null,
   tagID?: ModelIDInput | null,
@@ -260,6 +415,15 @@ export type ModelOrganizationTagFilterInput = {
   and?: Array< ModelOrganizationTagFilterInput | null > | null,
   or?: Array< ModelOrganizationTagFilterInput | null > | null,
   not?: ModelOrganizationTagFilterInput | null,
+};
+
+export type ModelSomethingASomethingBFilterInput = {
+  id?: ModelIDInput | null,
+  somethingAID?: ModelIDInput | null,
+  somethingBID?: ModelIDInput | null,
+  and?: Array< ModelSomethingASomethingBFilterInput | null > | null,
+  or?: Array< ModelSomethingASomethingBFilterInput | null > | null,
+  not?: ModelSomethingASomethingBFilterInput | null,
 };
 
 export type CreateTagMutationVariables = {
@@ -427,6 +591,147 @@ export type DeleteOrganizationMutation = {
   } | null,
 };
 
+export type CreateSomethingAMutationVariables = {
+  input: CreateSomethingAInput,
+  condition?: ModelSomethingAConditionInput | null,
+};
+
+export type CreateSomethingAMutation = {
+  createSomethingA?:  {
+    __typename: "SomethingA",
+    id: string,
+    name: string,
+    somethingBs?:  {
+      __typename: "ModelSomethingASomethingBConnection",
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type UpdateSomethingAMutationVariables = {
+  input: UpdateSomethingAInput,
+  condition?: ModelSomethingAConditionInput | null,
+};
+
+export type UpdateSomethingAMutation = {
+  updateSomethingA?:  {
+    __typename: "SomethingA",
+    id: string,
+    name: string,
+    somethingBs?:  {
+      __typename: "ModelSomethingASomethingBConnection",
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type DeleteSomethingAMutationVariables = {
+  input: DeleteSomethingAInput,
+  condition?: ModelSomethingAConditionInput | null,
+};
+
+export type DeleteSomethingAMutation = {
+  deleteSomethingA?:  {
+    __typename: "SomethingA",
+    id: string,
+    name: string,
+    somethingBs?:  {
+      __typename: "ModelSomethingASomethingBConnection",
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type CreateSomethingBMutationVariables = {
+  input: CreateSomethingBInput,
+  condition?: ModelSomethingBConditionInput | null,
+};
+
+export type CreateSomethingBMutation = {
+  createSomethingB?:  {
+    __typename: "SomethingB",
+    id: string,
+    name: string,
+    description?: string | null,
+    somethingAs?:  {
+      __typename: "ModelSomethingASomethingBConnection",
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type UpdateSomethingBMutationVariables = {
+  input: UpdateSomethingBInput,
+  condition?: ModelSomethingBConditionInput | null,
+};
+
+export type UpdateSomethingBMutation = {
+  updateSomethingB?:  {
+    __typename: "SomethingB",
+    id: string,
+    name: string,
+    description?: string | null,
+    somethingAs?:  {
+      __typename: "ModelSomethingASomethingBConnection",
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type DeleteSomethingBMutationVariables = {
+  input: DeleteSomethingBInput,
+  condition?: ModelSomethingBConditionInput | null,
+};
+
+export type DeleteSomethingBMutation = {
+  deleteSomethingB?:  {
+    __typename: "SomethingB",
+    id: string,
+    name: string,
+    description?: string | null,
+    somethingAs?:  {
+      __typename: "ModelSomethingASomethingBConnection",
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
 export type CreateOrganizationTagMutationVariables = {
   input: CreateOrganizationTagInput,
   condition?: ModelOrganizationTagConditionInput | null,
@@ -557,6 +862,126 @@ export type DeleteOrganizationTagMutation = {
       trainingInformation?: string | null,
       areasServed?: string | null,
       orgUrl?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    },
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type CreateSomethingASomethingBMutationVariables = {
+  input: CreateSomethingASomethingBInput,
+  condition?: ModelSomethingASomethingBConditionInput | null,
+};
+
+export type CreateSomethingASomethingBMutation = {
+  createSomethingASomethingB?:  {
+    __typename: "SomethingASomethingB",
+    id: string,
+    somethingAID: string,
+    somethingBID: string,
+    somethingA:  {
+      __typename: "SomethingA",
+      id: string,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    },
+    somethingB:  {
+      __typename: "SomethingB",
+      id: string,
+      name: string,
+      description?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    },
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type UpdateSomethingASomethingBMutationVariables = {
+  input: UpdateSomethingASomethingBInput,
+  condition?: ModelSomethingASomethingBConditionInput | null,
+};
+
+export type UpdateSomethingASomethingBMutation = {
+  updateSomethingASomethingB?:  {
+    __typename: "SomethingASomethingB",
+    id: string,
+    somethingAID: string,
+    somethingBID: string,
+    somethingA:  {
+      __typename: "SomethingA",
+      id: string,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    },
+    somethingB:  {
+      __typename: "SomethingB",
+      id: string,
+      name: string,
+      description?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    },
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type DeleteSomethingASomethingBMutationVariables = {
+  input: DeleteSomethingASomethingBInput,
+  condition?: ModelSomethingASomethingBConditionInput | null,
+};
+
+export type DeleteSomethingASomethingBMutation = {
+  deleteSomethingASomethingB?:  {
+    __typename: "SomethingASomethingB",
+    id: string,
+    somethingAID: string,
+    somethingBID: string,
+    somethingA:  {
+      __typename: "SomethingA",
+      id: string,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    },
+    somethingB:  {
+      __typename: "SomethingB",
+      id: string,
+      name: string,
+      description?: string | null,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -740,6 +1165,151 @@ export type SyncOrganizationsQuery = {
   } | null,
 };
 
+export type GetSomethingAQueryVariables = {
+  id: string,
+};
+
+export type GetSomethingAQuery = {
+  getSomethingA?:  {
+    __typename: "SomethingA",
+    id: string,
+    name: string,
+    somethingBs?:  {
+      __typename: "ModelSomethingASomethingBConnection",
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type ListSomethingASQueryVariables = {
+  filter?: ModelSomethingAFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListSomethingASQuery = {
+  listSomethingAS?:  {
+    __typename: "ModelSomethingAConnection",
+    items:  Array< {
+      __typename: "SomethingA",
+      id: string,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    } | null >,
+    nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type SyncSomethingASQueryVariables = {
+  filter?: ModelSomethingAFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  lastSync?: number | null,
+};
+
+export type SyncSomethingASQuery = {
+  syncSomethingAS?:  {
+    __typename: "ModelSomethingAConnection",
+    items:  Array< {
+      __typename: "SomethingA",
+      id: string,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    } | null >,
+    nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type GetSomethingBQueryVariables = {
+  id: string,
+};
+
+export type GetSomethingBQuery = {
+  getSomethingB?:  {
+    __typename: "SomethingB",
+    id: string,
+    name: string,
+    description?: string | null,
+    somethingAs?:  {
+      __typename: "ModelSomethingASomethingBConnection",
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type ListSomethingBSQueryVariables = {
+  filter?: ModelSomethingBFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListSomethingBSQuery = {
+  listSomethingBS?:  {
+    __typename: "ModelSomethingBConnection",
+    items:  Array< {
+      __typename: "SomethingB",
+      id: string,
+      name: string,
+      description?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    } | null >,
+    nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type SyncSomethingBSQueryVariables = {
+  filter?: ModelSomethingBFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  lastSync?: number | null,
+};
+
+export type SyncSomethingBSQuery = {
+  syncSomethingBS?:  {
+    __typename: "ModelSomethingBConnection",
+    items:  Array< {
+      __typename: "SomethingB",
+      id: string,
+      name: string,
+      description?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    } | null >,
+    nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
 export type GetOrganizationTagQueryVariables = {
   id: string,
 };
@@ -827,6 +1397,96 @@ export type SyncOrganizationTagsQuery = {
       id: string,
       tagID: string,
       organizationID: string,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    } | null >,
+    nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type GetSomethingASomethingBQueryVariables = {
+  id: string,
+};
+
+export type GetSomethingASomethingBQuery = {
+  getSomethingASomethingB?:  {
+    __typename: "SomethingASomethingB",
+    id: string,
+    somethingAID: string,
+    somethingBID: string,
+    somethingA:  {
+      __typename: "SomethingA",
+      id: string,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    },
+    somethingB:  {
+      __typename: "SomethingB",
+      id: string,
+      name: string,
+      description?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    },
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type ListSomethingASomethingBSQueryVariables = {
+  filter?: ModelSomethingASomethingBFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListSomethingASomethingBSQuery = {
+  listSomethingASomethingBS?:  {
+    __typename: "ModelSomethingASomethingBConnection",
+    items:  Array< {
+      __typename: "SomethingASomethingB",
+      id: string,
+      somethingAID: string,
+      somethingBID: string,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    } | null >,
+    nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type SyncSomethingASomethingBSQueryVariables = {
+  filter?: ModelSomethingASomethingBFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  lastSync?: number | null,
+};
+
+export type SyncSomethingASomethingBSQuery = {
+  syncSomethingASomethingBS?:  {
+    __typename: "ModelSomethingASomethingBConnection",
+    items:  Array< {
+      __typename: "SomethingASomethingB",
+      id: string,
+      somethingAID: string,
+      somethingBID: string,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -973,6 +1633,117 @@ export type OnDeleteOrganizationSubscription = {
   } | null,
 };
 
+export type OnCreateSomethingASubscription = {
+  onCreateSomethingA?:  {
+    __typename: "SomethingA",
+    id: string,
+    name: string,
+    somethingBs?:  {
+      __typename: "ModelSomethingASomethingBConnection",
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type OnUpdateSomethingASubscription = {
+  onUpdateSomethingA?:  {
+    __typename: "SomethingA",
+    id: string,
+    name: string,
+    somethingBs?:  {
+      __typename: "ModelSomethingASomethingBConnection",
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type OnDeleteSomethingASubscription = {
+  onDeleteSomethingA?:  {
+    __typename: "SomethingA",
+    id: string,
+    name: string,
+    somethingBs?:  {
+      __typename: "ModelSomethingASomethingBConnection",
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type OnCreateSomethingBSubscription = {
+  onCreateSomethingB?:  {
+    __typename: "SomethingB",
+    id: string,
+    name: string,
+    description?: string | null,
+    somethingAs?:  {
+      __typename: "ModelSomethingASomethingBConnection",
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type OnUpdateSomethingBSubscription = {
+  onUpdateSomethingB?:  {
+    __typename: "SomethingB",
+    id: string,
+    name: string,
+    description?: string | null,
+    somethingAs?:  {
+      __typename: "ModelSomethingASomethingBConnection",
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type OnDeleteSomethingBSubscription = {
+  onDeleteSomethingB?:  {
+    __typename: "SomethingB",
+    id: string,
+    name: string,
+    description?: string | null,
+    somethingAs?:  {
+      __typename: "ModelSomethingASomethingBConnection",
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
 export type OnCreateOrganizationTagSubscription = {
   onCreateOrganizationTag?:  {
     __typename: "OrganizationTag",
@@ -1088,6 +1859,111 @@ export type OnDeleteOrganizationTagSubscription = {
       trainingInformation?: string | null,
       areasServed?: string | null,
       orgUrl?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    },
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type OnCreateSomethingASomethingBSubscription = {
+  onCreateSomethingASomethingB?:  {
+    __typename: "SomethingASomethingB",
+    id: string,
+    somethingAID: string,
+    somethingBID: string,
+    somethingA:  {
+      __typename: "SomethingA",
+      id: string,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    },
+    somethingB:  {
+      __typename: "SomethingB",
+      id: string,
+      name: string,
+      description?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    },
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type OnUpdateSomethingASomethingBSubscription = {
+  onUpdateSomethingASomethingB?:  {
+    __typename: "SomethingASomethingB",
+    id: string,
+    somethingAID: string,
+    somethingBID: string,
+    somethingA:  {
+      __typename: "SomethingA",
+      id: string,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    },
+    somethingB:  {
+      __typename: "SomethingB",
+      id: string,
+      name: string,
+      description?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    },
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type OnDeleteSomethingASomethingBSubscription = {
+  onDeleteSomethingASomethingB?:  {
+    __typename: "SomethingASomethingB",
+    id: string,
+    somethingAID: string,
+    somethingBID: string,
+    somethingA:  {
+      __typename: "SomethingA",
+      id: string,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    },
+    somethingB:  {
+      __typename: "SomethingB",
+      id: string,
+      name: string,
+      description?: string | null,
       createdAt: string,
       updatedAt: string,
       _version: number,

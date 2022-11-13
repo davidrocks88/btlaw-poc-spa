@@ -18,3 +18,16 @@ type Organization @model @auth(rules: [{ allow: public }]) {
   orgUrl: String
   Tags: [Tag] @manyToMany(relationName: "OrganizationTag")
 }
+
+type SomethingA @model @auth(rules: [{ allow: public }]) {
+  id: ID!
+  name: String!
+  somethingBs: [SomethingB] @manyToMany(relationName: "SomethingASomethingB")
+}
+
+type SomethingB @model @auth(rules: [{ allow: public }]) {
+  id: ID!
+  name: String!
+  description: String
+  somethingAs: [SomethingA] @manyToMany(relationName: "SomethingASomethingB")
+}

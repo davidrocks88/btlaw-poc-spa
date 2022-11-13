@@ -4,6 +4,7 @@ import {
 import { API, graphqlOperation } from 'aws-amplify';
 import { Organization } from '../API';
 import * as queries from '../graphql/queries';
+import { useOrganizationTagList } from './useOrganizationTagList';
 
 
 export function useOrganizationList() {
@@ -15,9 +16,25 @@ export function useOrganizationList() {
     { cacheTime: 0 }
   )
 
+  const { isLoading: organizationTagListLoading, organizationTagList, refetch: refetchOrganizationTagList } = useOrganizationTagList()
+
+  if (!isLoading && !organizationTagListLoading && data && organizationTagList) {
+    data.forEach(org => {
+      org.Tags = {
+        __typename: "ModelOrganizationTagConnection",
+        items: [
+          ...organizationTagList.filter(orgTag => orgTag.organizationID === org.id)
+        ]
+      }
+    })
+  }
+
   return {
-    isLoading,
-    organizationList: data,
-    refetch
+    isLoading: isLoading && organizationTagListLoading,
+    organizationList: (data ?? []).sort((t1, t2) => t1.name.trim().toLocaleLowerCase().localeCompare(t2.name.trim().toLocaleLowerCase())),
+    refetch: () => {
+      refetchOrganizationTagList()
+      refetch()
+    }
   }
 }

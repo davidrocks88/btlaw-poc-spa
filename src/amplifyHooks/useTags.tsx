@@ -31,3 +31,8 @@ export async function createTag(name: string) {
   const newTag = await API.graphql(graphqlOperation(mutations.createTag, { input: { name } }))
   return newTag as Tag
 }
+
+export async function deleteTag({ id, _version }: Tag) {
+  const newTag = await API.graphql(graphqlOperation(mutations.deleteTag, { input: { id, _version } }))
+  return newTag
+}

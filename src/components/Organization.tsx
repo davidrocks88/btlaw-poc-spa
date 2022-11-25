@@ -35,7 +35,7 @@ function getDescriptionTruncated(description: string) {
 export function Organization({ organizationID }: OrganizationProps) {
   const [showModal, setshowModal] = useState<boolean>(false)
   const { organization, tags } = useOrganization(organizationID)
-  const showEditButton = false
+  const showEditButton = true
 
   if (!organization) {
     return <></>

@@ -67,9 +67,18 @@ export async function createOrganization(
   return newOrg
 }
 
-export async function deleteOrganization({ id }: Organization) {
+export async function deleteOrganization({ id }: SimpleOrganization) {
   const newOrg = await API.graphql(
     graphqlOperation(mutations.deleteOrganization, { input: { id } }),
+  )
+  return newOrg
+}
+
+export async function updateOrganization(organization: SimpleOrganization) {
+  const newOrg = await API.graphql(
+    graphqlOperation(mutations.updateOrganization, {
+      input: { ...organization, tags: undefined, createdAt: undefined, updatedAt: undefined },
+    }),
   )
   return newOrg
 }
@@ -80,3 +89,18 @@ export async function deleteOrganizationTag({ id }: OrganizationTag) {
   )
   return newOrg
 }
+
+export function createEmptyOrganization(): Omit<
+  Organization,
+  '__typename' | 'createdAt' | 'updatedAt' | '_version' | '_lastChangedAt'
+> {
+  return {
+    id: '',
+    name: '',
+  }
+}
+
+export type SimpleOrganization = Omit<
+  Organization,
+  '__typename' | 'createdAt' | 'updatedAt' | '_version' | '_lastChangedAt'
+>

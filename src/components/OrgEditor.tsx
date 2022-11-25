@@ -1,26 +1,43 @@
-import { IOrganization } from './Organization'
 import { useNavigate, useParams } from 'react-router-dom'
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import { v4 } from 'uuid'
 import { useFormik } from 'formik'
-import { useTags } from '../hooks/useTags'
-import { useOrganization } from '../hooks/useOrganization'
-import { BASE_URL, toTitleCase } from '../common'
+import {
+  createEmptyOrganization,
+  createOrganization,
+  deleteOrganization,
+  SimpleOrganization,
+  updateOrganization,
+  useOrganization,
+  useTags,
+} from '../amplifyHooks'
+import { toTitleCase } from '../common'
 import { useState } from 'react'
+import { Tag } from '../API'
 
 export interface OrganizationFormProps {
-  organization: IOrganization
+  organization: SimpleOrganization
 }
 
 export function OrgEditor() {
   const { id } = useParams()
-  const { organization, isLoading } = useOrganization(id)
+  if (id) {
+    return <ExistingEditorForm />
+  } else {
+    return <NewOrgEditorForm />
+  }
+}
+
+function NewOrgEditorForm() {
+  return <OrgEditorForm organization={createEmptyOrganization()} />
+}
+
+function ExistingEditorForm() {
+  const { id } = useParams()
+  const { organization, isLoading } = useOrganization(id ?? '')
   if (isLoading) {
     console.log('loading')
     return <p>Loading...</p>
   } else {
-    return <OrgEditorForm organization={organization} />
+    return <OrgEditorForm organization={organization ?? createEmptyOrganization()} />
   }
 }
 
@@ -29,33 +46,27 @@ function OrgEditorForm({ organization }: OrganizationFormProps) {
   const navigate = useNavigate()
   const [creatingTag, setCreatingTag] = useState(false)
   const [newTag, setNewTag] = useState('')
-  const formik = useFormik<IOrganization>({
+  const formik = useFormik<SimpleOrganization>({
     initialValues: {
       ...organization,
-      id: organization?.id ?? v4(),
-      name: organization?.name ?? '',
-      description: organization?.description ?? '',
-      tags: organization?.tags ?? [],
+      // tags: organization?.tags ?? [],
     },
     onSubmit: (values) => {
-      values.tags = values.tags.map((t) => toTitleCase(t))
-      fetch(`${BASE_URL}/organizations`, {
-        method: 'POST',
-        mode: 'no-cors',
-        body: JSON.stringify({
-          ...values,
-        }),
-        headers: new Headers({ 'content-type': 'application/json' }),
-      })
-        .then((res) => console.log(res))
-        .then((a) => navigate('../', { replace: true }))
+      if (!values.id.length) {
+        const orgWithoutId = { ...values, id: undefined }
+        createOrganization(orgWithoutId)
+          .then((res) => console.log(res))
+          .then((a) => navigate('../', { replace: true }))
+      } else {
+        updateOrganization({ ...values, tags: undefined })
+          .then((res) => console.log(res))
+          .then((a) => navigate('../', { replace: true }))
+      }
     },
   })
 
-  function deleteOrganization() {
-    fetch(`${BASE_URL}/organizations/${organization.id}`, {
-      method: 'DELETE',
-    })
+  function _deleteOrganization() {
+    deleteOrganization(organization)
       .then((res) => console.log(res))
       .then((a) => navigate('../', { replace: true }))
   }
@@ -84,7 +95,7 @@ function OrgEditorForm({ organization }: OrganizationFormProps) {
             <input
               className='w-64 bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal'
               type='text'
-              value={formik.values.orgUrl}
+              value={formik.values.orgUrl ?? ''}
               name='orgUrl'
               onChange={formik.handleChange}
             />
@@ -94,7 +105,7 @@ function OrgEditorForm({ organization }: OrganizationFormProps) {
             <input
               className='w-64 bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal'
               type='text'
-              value={formik.values.volunteerUrl}
+              value={formik.values.volunteerUrl ?? ''}
               name='volunteerUrl'
               onChange={formik.handleChange}
             />
@@ -105,7 +116,7 @@ function OrgEditorForm({ organization }: OrganizationFormProps) {
           <textarea
             className='w-[64em] bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal h-24'
             rows={6}
-            value={formik.values.description}
+            value={formik.values.description ?? ''}
             name='description'
             onChange={formik.handleChange}
           />
@@ -115,7 +126,7 @@ function OrgEditorForm({ organization }: OrganizationFormProps) {
           <input
             className='w-[64em] bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal'
             type='textarea'
-            value={formik.values.trainingInformation}
+            value={formik.values.trainingInformation ?? ''}
             name='trainingInformation'
             onChange={formik.handleChange}
           />
@@ -125,7 +136,7 @@ function OrgEditorForm({ organization }: OrganizationFormProps) {
           <input
             className='w-[64em] bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal'
             type='textarea'
-            value={formik.values.areasServed}
+            value={formik.values.areasServed ?? ''}
             name='areasServed'
             onChange={formik.handleChange}
           />
@@ -140,7 +151,7 @@ function OrgEditorForm({ organization }: OrganizationFormProps) {
             <input
               className='w-64 bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal'
               type='text'
-              value={formik.values.btContactName}
+              value={formik.values.btContactName ?? ''}
               name='btContactName'
               onChange={formik.handleChange}
             />
@@ -155,7 +166,7 @@ function OrgEditorForm({ organization }: OrganizationFormProps) {
             <input
               className='w-64 bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal'
               type='text'
-              value={formik.values.volunteerContactName}
+              value={formik.values.volunteerContactName ?? ''}
               name='volunteerContactName'
               onChange={formik.handleChange}
             />
@@ -166,7 +177,7 @@ function OrgEditorForm({ organization }: OrganizationFormProps) {
             <input
               className='w-64 bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal'
               type='text'
-              value={formik.values.volunteerContactEmail}
+              value={formik.values.volunteerContactEmail ?? ''}
               name='volunteerContactEmail'
               onChange={formik.handleChange}
             />
@@ -177,14 +188,14 @@ function OrgEditorForm({ organization }: OrganizationFormProps) {
             <input
               className='w-64 bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal'
               type='text'
-              value={formik.values.volunteerContactPhone}
+              value={formik.values.volunteerContactPhone ?? ''}
               name='volunteerContactPhone'
               onChange={formik.handleChange}
             />
           </label>
         </div>
         <hr className='my-4' />
-        <label className='block text-gray-700 text-sm font-bold mb-2'>
+        {/* <label className='block text-gray-700 text-sm font-bold mb-2'>
           Tags:
           <div className='my-2 flex flex-row flex-wrap gap-y-2 items-end align-middle content-center'>
             <div className={`border border-1 border-solid border-black ${tagCSS}`}>
@@ -242,7 +253,7 @@ function OrgEditorForm({ organization }: OrganizationFormProps) {
                   </div>
                 ))}
           </div>
-        </label>
+        </label> */}
 
         <div className='flex flex-row gap-2'>
           <a href='/'>
@@ -252,7 +263,7 @@ function OrgEditorForm({ organization }: OrganizationFormProps) {
           </a>
 
           <div
-            onClick={deleteOrganization}
+            onClick={_deleteOrganization}
             className='text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800'
           >
             Delete

@@ -5,10 +5,9 @@ import { App } from './App'
 import reportWebVitals from './reportWebVitals'
 import { BrowserRouter, Link, Routes, Route } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { OrgEditor } from './OrgEditor'
+import { OrgEditor, Migration } from './components'
 import awsExports from './aws-exports'
 import { Amplify } from 'aws-amplify'
-import { Migration } from './Migration'
 import { Test } from './Test'
 
 Amplify.configure(awsExports)

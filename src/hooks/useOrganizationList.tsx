@@ -1,8 +1,6 @@
-import {
-  useQuery
-} from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 import { BASE_URL } from '../common'
-import { IOrganization } from '../Organization'
+import { IOrganization } from '../components'
 
 export function useOrganizationList() {
   const { isLoading, data } = useQuery<IOrganization[]>(['organizations'], async () => {
@@ -13,6 +11,6 @@ export function useOrganizationList() {
 
   return {
     organizations: data,
-    isLoading
+    isLoading,
   }
 }

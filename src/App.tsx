@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import './App.css'
-import { Organization } from './Organization'
-import { Tag as TagComponent } from './Tag'
+import { Organization, Tag as TagComponent } from './components'
 import { useTags, useOrganizationList } from './amplifyHooks'
 import { Tag } from './API'
 

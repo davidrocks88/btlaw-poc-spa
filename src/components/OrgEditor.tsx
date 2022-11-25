@@ -4,9 +4,9 @@ import { useNavigate, useParams } from 'react-router-dom'
 // @ts-ignore
 import { v4 } from 'uuid'
 import { useFormik } from 'formik'
-import { useTags } from './hooks/useTags'
-import { useOrganization } from './hooks/useOrganization'
-import { BASE_URL, toTitleCase } from './common'
+import { useTags } from '../hooks/useTags'
+import { useOrganization } from '../hooks/useOrganization'
+import { BASE_URL, toTitleCase } from '../common'
 import { useState } from 'react'
 
 export interface OrganizationFormProps {

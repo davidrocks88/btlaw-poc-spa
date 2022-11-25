@@ -1,4 +1,4 @@
-import { Tag as TagModel } from './API'
+import { Tag as TagModel } from '../API'
 
 export interface TagProps {
   tag: TagModel

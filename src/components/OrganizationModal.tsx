@@ -1,9 +1,9 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { Fragment, useRef, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-import { Accordion } from './Accordion'
-import EditIcon from './edit-button-svgrepo-com.svg'
-import { useOrganization } from './amplifyHooks'
+import { Accordion } from '.'
+import EditIcon from '../icons/edit-button-svgrepo-com.svg'
+import { useOrganization } from '../amplifyHooks'
 
 export interface OrganizationModalProps {
   organizationID: string

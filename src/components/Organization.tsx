@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import OrganizationModal from './OrganizationModal'
 import _ from 'lodash'
-import EditIcon from './edit-button-svgrepo-com.svg'
-import { toTitleCase } from './common'
-import { useOrganization } from './amplifyHooks'
+import EditIcon from '../icons/edit-button-svgrepo-com.svg'
+import { toTitleCase } from '../common'
+import { useOrganization } from '../amplifyHooks'
 
 export interface IOrganization {
   id: string

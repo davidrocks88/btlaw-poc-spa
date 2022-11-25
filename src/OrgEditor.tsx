@@ -26,7 +26,7 @@ export function OrgEditor() {
 
 function OrgEditorForm({ organization }: OrganizationFormProps) {
   const { tags } = useTags()
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   const [creatingTag, setCreatingTag] = useState(false)
   const [newTag, setNewTag] = useState('')
   const formik = useFormik<IOrganization>({

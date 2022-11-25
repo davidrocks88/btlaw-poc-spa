@@ -3,7 +3,7 @@ import { Fragment, useRef, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { Accordion } from './Accordion'
 import EditIcon from "./edit-button-svgrepo-com.svg"
-import { useOrganization } from './amplifyHooks/useOrganization'
+import { useOrganization } from './amplifyHooks'
 
 export interface OrganizationModalProps {
   organizationID: string,

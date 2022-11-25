@@ -1,9 +1,10 @@
 import { useTags } from "./hooks/useTags"
 import { useOrganizationList } from "./hooks/useOrganizationList"
-import { useOrganizationList as useAmplifyOrganizationList } from "./amplifyHooks/useOrganizationList"
-import { useTags as useAmplifyTags, createTag, deleteTag } from "./amplifyHooks/useTags"
-import { createOrganization, deleteOrganization, deleteOrganizationTag } from "./amplifyHooks/useOrganization"
-import { useOrganizationTagList } from "./amplifyHooks/useOrganizationTagList"
+import {
+  useOrganizationList as useAmplifyOrganizationList,
+  useTags as useAmplifyTags,
+  createTag, deleteTag, createOrganization, deleteOrganization, deleteOrganizationTag, useOrganizationTagList
+} from "./amplifyHooks"
 import { Tag } from "./API"
 
 export function Migration() {

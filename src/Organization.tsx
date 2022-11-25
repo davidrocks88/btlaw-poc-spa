@@ -3,7 +3,7 @@ import OrganizationModal from './OrganizationModal'
 import _ from "lodash";
 import EditIcon from "./edit-button-svgrepo-com.svg"
 import { toTitleCase } from './common';
-import { useOrganization } from './amplifyHooks/useOrganization';
+import { useOrganization } from './amplifyHooks';
 
 export interface IOrganization {
   id: string
@@ -35,7 +35,7 @@ function getDescriptionTruncated(description: string) {
 
 
 export function Organization({ organizationID }: OrganizationProps) {
-  const [showModal, setshowModal] = useState<Boolean>(false)
+  const [showModal, setshowModal] = useState<boolean>(false)
   const { organization, tags } = useOrganization(organizationID)
   const showEditButton = false
 

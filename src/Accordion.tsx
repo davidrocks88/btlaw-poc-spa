@@ -1,3 +1,5 @@
+/*eslint react/no-unknown-property: "off" */
+
 import React, { useRef, useState } from 'react'
 
 interface AccordionProps {

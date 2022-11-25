@@ -2,8 +2,8 @@ import { Tag as TagModel } from "./API"
 
 export interface TagProps {
   tag: TagModel
-  handleClick: (tag: TagModel, value: Boolean) => void
-  filters?: { [tagID: string]: Boolean }
+  handleClick: (tag: TagModel, value: boolean) => void
+  filters?: { [tagID: string]: boolean }
 }
 
 export function Tag({ tag, handleClick, filters = {} }: TagProps) {

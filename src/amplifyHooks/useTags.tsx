@@ -40,3 +40,35 @@ export async function deleteTag({ id }: Tag) {
   const newTag = await API.graphql(graphqlOperation(mutations.deleteTag, { input: { id } }))
   return newTag
 }
+
+export function useTagsByIds(ids: string[]) {
+  const { data, refetch } = useQuery<Tag[]>(
+    ['tags', 'amplify', 'byId'],
+    async () => {
+      const tagsData = await Promise.all(
+        ids.map((id) =>
+          API.graphql<any>(
+            graphqlOperation(listTags, {
+              ...DEFAULT_QUERY_FILTER,
+              filter: { ...DEFAULT_QUERY_FILTER.filter, id: { eq: id } },
+            }),
+          ),
+        ),
+      )
+      return _.flatten(tagsData.map((data) => data.data.listTags.items))
+    },
+    {
+      cacheTime: 0,
+    },
+  )
+
+  const sorted = data?.sort((t1: Tag, t2: Tag) =>
+    t1.name.trim().toLocaleLowerCase().localeCompare(t2.name.trim().toLocaleLowerCase()),
+  )
+  const tags = _.uniq(sorted)
+
+  return {
+    tags,
+    refetch,
+  }
+}

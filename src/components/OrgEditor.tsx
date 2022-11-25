@@ -9,6 +9,7 @@ import {
   useOrganization,
   useOrganizationTagList,
   useTags,
+  useTagsByIds,
 } from '../amplifyHooks'
 import { toTitleCase } from '../common'
 import { useState } from 'react'
@@ -53,6 +54,8 @@ function OrgEditorForm({ organization }: OrganizationFormProps) {
   const navigate = useNavigate()
   const [creatingTag, setCreatingTag] = useState(false)
   const [newTag, setNewTag] = useState('')
+  const { tags: orgTags } = useTagsByIds(allTags.map((t) => t.id))
+  console.log({ orgTags })
   const formik = useFormik<OrganizationForm>({
     initialValues: {
       organization,

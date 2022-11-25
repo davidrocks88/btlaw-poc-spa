@@ -2,7 +2,7 @@
   "version": "1",
   "cognitoConfig": {
     "identityPoolName": "btlawprobonofc543626_identitypool_fc543626",
-    "allowUnauthenticatedIdentities": false,
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "btlawpfc543626",
     "userPoolName": "btlawprobonofc543626_userpool_fc543626",
     "autoVerifiedAttributes": [
@@ -36,16 +36,15 @@
     "sharedId": "fc543626",
     "resourceName": "btlawprobonofc543626",
     "authSelections": "identityPoolAndUserPool",
-    "useDefault": "defaultSocial",
-    "hostedUI": true,
+    "useDefault": "manual",
+    "hostedUI": false,
     "usernameAttributes": [
       "email"
     ],
     "triggers": {},
-    "hostedUIDomainName": "btlawprobonofc543626-fc543626",
-    "authProvidersUserPool": [],
-    "hostedUIProviderMeta": "[]",
-    "userPoolGroupList": [],
+    "userPoolGroupList": [
+      "Admin"
+    ],
     "serviceName": "Cognito",
     "usernameCaseSensitive": false,
     "useEnabledMfas": true,
@@ -70,6 +69,10 @@
     "signinwithappleAuthorizeScopes": [
       "email"
     ],
-    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:3000/\",\"https://localhost:3000/\"],\"LogoutURLs\":[\"http://localhost:3000/logout/\"]}"
+    "thirdPartyAuth": true,
+    "authProviders": [],
+    "userPoolGroups": true,
+    "adminQueries": true,
+    "adminQueryGroup": "Admin"
   }
 }

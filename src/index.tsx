@@ -1,80 +1,21 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
-import { App } from './App'
 import reportWebVitals from './reportWebVitals'
-import { BrowserRouter, Link, Routes, Route } from 'react-router-dom'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { OrgEditor, Migration } from './components'
 import awsExports from './aws-exports'
 import { Amplify } from 'aws-amplify'
-import { Test } from './Test'
-import AuthTest from './components/AuthTest'
+import Root from './components/Root'
+import { Authenticator } from '@aws-amplify/ui-react';
 
 Amplify.configure(awsExports)
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
-const queryClient = new QueryClient()
-const showNewOrgButton = false
 
 root.render(
   <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <div className=''>
-          <nav className='flex items-center justify-between flex-wrap bg-[#131829] p-6'>
-            <div className='flex items-center flex-shrink-0 text-white mr-6'>
-              <a href='https://btlaw.com' target='_blank' rel='noreferrer'>
-                <img
-                  alt='btlaw icon'
-                  className='h-8'
-                  src='https://btlaw.com/-/media/images/btlaw/site-logo/btlawlogo.ashx?h=69&w=411&la=en&hash=C3C4E5F6805DC4719AF72237AD0B82E1'
-                />
-              </a>
-              <span className='ml-4 font-semibold text-xl tracking-tight'>Pro Bono Finder™</span>
-            </div>
-            <div className='w-full block flex-grow lg:flex lg:items-center lg:w-auto'>
-              <div className='text-sm lg:flex-grow'>
-                <a
-                  href='#responsive-header'
-                  className='block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4'
-                >
-                  {''}
-                </a>
-              </div>
-              {showNewOrgButton && (
-                <div>
-                  <Link to='newOrg'>
-                    <div className='inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0'>
-                      Submit New Organization
-                    </div>
-                  </Link>
-                </div>
-              )}
-              <a
-                href='mailto:jason.bernstein@btlaw.com?Subject=Pro Bono Finder Feedback'
-                target='_blank'
-                rel='noreferrer'
-              >
-                <div className='inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0'>
-                  Give Us Feedback
-                </div>
-              </a>
-            </div>
-          </nav>
-          <Routes>
-            <Route path='/'>
-              <Route index element={<App />} />
-              <Route path='newOrg' element={<OrgEditor />} />
-              <Route path='newOrg/:id' element={<OrgEditor />} />
-              <Route path='migration' element={<Migration />} />
-              <Route path='test' element={<Test />} />
-              <Route path='auth' element={<AuthTest />} />
-            </Route>
-          </Routes>
-        </div>
-      </BrowserRouter>
-    </QueryClientProvider>
+    <Authenticator.Provider>
+      <Root />
+    </Authenticator.Provider>
   </React.StrictMode>,
 )
 

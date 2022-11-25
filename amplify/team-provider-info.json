@@ -13,10 +13,18 @@
     },
     "categories": {
       "api": {
-        "BTLawProBono": {}
+        "BTLawProBono": {},
+        "AdminQueries": {}
       },
       "auth": {
-        "btlawprobonofc543626": {}
+        "btlawprobonofc543626": {},
+        "userPoolGroups": {}
+      },
+      "function": {
+        "AdminQueries887f6847": {
+          "deploymentBucketName": "amplify-btlawprobono-staging-42942-deployment",
+          "s3Key": "amplify-builds/AdminQueries887f6847-5a4668513938744e7967-build.zip"
+        }
       }
     }
   }

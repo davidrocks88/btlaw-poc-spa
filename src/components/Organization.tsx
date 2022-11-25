@@ -4,6 +4,7 @@ import _ from 'lodash'
 import EditIcon from '../icons/edit-button-svgrepo-com.svg'
 import { toTitleCase } from '../common'
 import { useOrganization } from '../amplifyHooks'
+import { useIsAdmin } from '../authHooks/useIsAdmin'
 
 export interface IOrganization {
   id: string
@@ -35,7 +36,7 @@ function getDescriptionTruncated(description: string) {
 export function Organization({ organizationID }: OrganizationProps) {
   const [showModal, setshowModal] = useState<boolean>(false)
   const { organization, tags } = useOrganization(organizationID)
-  const showEditButton = true
+  const showEditButton = useIsAdmin()
 
   if (!organization) {
     return <></>

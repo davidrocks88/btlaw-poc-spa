@@ -7,6 +7,7 @@ import {
   SimpleOrganization,
   updateOrganization,
   useOrganization,
+  useOrganizationTagList,
   useTags,
 } from '../amplifyHooks'
 import { toTitleCase } from '../common'
@@ -41,24 +42,30 @@ function ExistingEditorForm() {
   }
 }
 
+type OrganizationForm = {
+  organization: SimpleOrganization
+  tags: Tag[]
+}
+
 function OrgEditorForm({ organization }: OrganizationFormProps) {
-  const { tags } = useTags()
+  const { tags: allTags } = useTags()
+  const { organizationTagList } = useOrganizationTagList(organization.id)
   const navigate = useNavigate()
   const [creatingTag, setCreatingTag] = useState(false)
   const [newTag, setNewTag] = useState('')
-  const formik = useFormik<SimpleOrganization>({
+  const formik = useFormik<OrganizationForm>({
     initialValues: {
-      ...organization,
-      // tags: organization?.tags ?? [],
+      organization,
+      tags: [],
     },
     onSubmit: (values) => {
-      if (!values.id.length) {
-        const orgWithoutId = { ...values, id: undefined }
+      if (!values.organization.id.length) {
+        const orgWithoutId = { ...values.organization, id: undefined }
         createOrganization(orgWithoutId)
           .then((res) => console.log(res))
           .then((a) => navigate('../', { replace: true }))
       } else {
-        updateOrganization({ ...values, tags: undefined })
+        updateOrganization({ ...values.organization, tags: undefined })
           .then((res) => console.log(res))
           .then((a) => navigate('../', { replace: true }))
       }
@@ -74,7 +81,7 @@ function OrgEditorForm({ organization }: OrganizationFormProps) {
   const redStar = <div className='inline text-red-500'>*</div>
 
   const tagCSS = `cursor-pointer text-sm p-1 px-2 m-1 rounded-full inline hover:bg-gray-100 bg-gray-200`
-
+  console.log({ organization, organizationTagList })
   return (
     <form onSubmit={formik.handleSubmit}>
       <div className='flex flex-col m-6'>
@@ -84,7 +91,7 @@ function OrgEditorForm({ organization }: OrganizationFormProps) {
             <input
               className='w-64 bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal'
               type='text'
-              value={formik.values.name}
+              value={formik.values.organization.name}
               name='name'
               onChange={formik.handleChange}
               required
@@ -95,7 +102,7 @@ function OrgEditorForm({ organization }: OrganizationFormProps) {
             <input
               className='w-64 bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal'
               type='text'
-              value={formik.values.orgUrl ?? ''}
+              value={formik.values.organization.orgUrl ?? ''}
               name='orgUrl'
               onChange={formik.handleChange}
             />
@@ -105,7 +112,7 @@ function OrgEditorForm({ organization }: OrganizationFormProps) {
             <input
               className='w-64 bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal'
               type='text'
-              value={formik.values.volunteerUrl ?? ''}
+              value={formik.values.organization.volunteerUrl ?? ''}
               name='volunteerUrl'
               onChange={formik.handleChange}
             />
@@ -116,7 +123,7 @@ function OrgEditorForm({ organization }: OrganizationFormProps) {
           <textarea
             className='w-[64em] bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal h-24'
             rows={6}
-            value={formik.values.description ?? ''}
+            value={formik.values.organization.description ?? ''}
             name='description'
             onChange={formik.handleChange}
           />
@@ -126,7 +133,7 @@ function OrgEditorForm({ organization }: OrganizationFormProps) {
           <input
             className='w-[64em] bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal'
             type='textarea'
-            value={formik.values.trainingInformation ?? ''}
+            value={formik.values.organization.trainingInformation ?? ''}
             name='trainingInformation'
             onChange={formik.handleChange}
           />
@@ -136,7 +143,7 @@ function OrgEditorForm({ organization }: OrganizationFormProps) {
           <input
             className='w-[64em] bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal'
             type='textarea'
-            value={formik.values.areasServed ?? ''}
+            value={formik.values.organization.areasServed ?? ''}
             name='areasServed'
             onChange={formik.handleChange}
           />
@@ -151,7 +158,7 @@ function OrgEditorForm({ organization }: OrganizationFormProps) {
             <input
               className='w-64 bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal'
               type='text'
-              value={formik.values.btContactName ?? ''}
+              value={formik.values.organization.btContactName ?? ''}
               name='btContactName'
               onChange={formik.handleChange}
             />
@@ -166,7 +173,7 @@ function OrgEditorForm({ organization }: OrganizationFormProps) {
             <input
               className='w-64 bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal'
               type='text'
-              value={formik.values.volunteerContactName ?? ''}
+              value={formik.values.organization.volunteerContactName ?? ''}
               name='volunteerContactName'
               onChange={formik.handleChange}
             />
@@ -177,7 +184,7 @@ function OrgEditorForm({ organization }: OrganizationFormProps) {
             <input
               className='w-64 bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal'
               type='text'
-              value={formik.values.volunteerContactEmail ?? ''}
+              value={formik.values.organization.volunteerContactEmail ?? ''}
               name='volunteerContactEmail'
               onChange={formik.handleChange}
             />
@@ -188,7 +195,7 @@ function OrgEditorForm({ organization }: OrganizationFormProps) {
             <input
               className='w-64 bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal'
               type='text'
-              value={formik.values.volunteerContactPhone ?? ''}
+              value={formik.values.organization.volunteerContactPhone ?? ''}
               name='volunteerContactPhone'
               onChange={formik.handleChange}
             />
@@ -234,26 +241,26 @@ function OrgEditorForm({ organization }: OrganizationFormProps) {
               </div>
             ))}
           </div>
-        </label>
+        </label> */}
 
         <label className='block text-gray-700 text-sm font-bold mb-2'>
           Available Tags:
           <div className='my-2 flex flex-row flex-wrap gap-y-2 items-end align-middle content-center'>
-            {tags.length &&
-              tags
+            {allTags.length &&
+              allTags
                 .filter((t) => !formik.values.tags.includes(t))
                 .map((t) => (
-                  <div key={t} className='flex'>
+                  <div key={t.id} className='flex'>
                     <div
                       className={tagCSS}
                       onClick={() => formik.setFieldValue('tags', [...formik.values.tags, t])}
                     >
-                      {t}
+                      {toTitleCase(t.name)}
                     </div>
                   </div>
                 ))}
           </div>
-        </label> */}
+        </label>
 
         <div className='flex flex-row gap-2'>
           <a href='/'>

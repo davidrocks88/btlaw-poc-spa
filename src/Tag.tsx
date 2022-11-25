@@ -1,4 +1,4 @@
-import { Tag as TagModel } from "./API"
+import { Tag as TagModel } from './API'
 
 export interface TagProps {
   tag: TagModel
@@ -12,6 +12,13 @@ export function Tag({ tag, handleClick, filters = {} }: TagProps) {
   }
 
   return (
-    <div key={tag.name} className={`cursor-pointer text-sm p-1 px-2 m-1 rounded-full inline hover:bg-gray-300 ${filters[tag.id] ? 'bg-gray-400' : 'bg-gray-200'}`} onClick={click}>{tag.name}</div>
+    <div
+      key={tag.name}
+      className={`cursor-pointer text-sm p-1 px-2 m-1 rounded-full inline hover:bg-gray-300 ${filters[tag.id] ? 'bg-gray-400' : 'bg-gray-200'
+        }`}
+      onClick={click}
+    >
+      {tag.name}
+    </div>
   )
 }

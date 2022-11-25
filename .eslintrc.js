@@ -4,37 +4,39 @@ module.exports = {
     es2021: true,
   },
   extends: [
-    "eslint:recommended",
-    "plugin:react/recommended",
-    "plugin:@typescript-eslint/recommended",
-    "react-app",
+    'eslint:recommended',
+    'plugin:react/recommended',
+    'plugin:@typescript-eslint/recommended',
+    'react-app',
+    'prettier',
   ],
-  parser: "@typescript-eslint/parser",
+  parser: '@typescript-eslint/parser',
   parserOptions: {
-    ecmaVersion: "latest",
-    sourceType: "module",
+    ecmaVersion: 'latest',
+    sourceType: 'module',
   },
-  plugins: ["react", "@typescript-eslint"],
+  plugins: ['react', '@typescript-eslint', 'prettier'],
   rules: {
-    "react/no-unescaped-entities": "off",
-    "react/react-in-jsx-scope": "off",
-    "@typescript-eslint/ban-ts-comment": "off",
+    'react/no-unescaped-entities': 'off',
+    'react/react-in-jsx-scope': 'off',
+    '@typescript-eslint/ban-ts-comment': 'off',
+    'prettier/prettier': 2,
   },
   overrides: [
     {
-      files: ["src/**/*.ts"],
+      files: ['src/**/*.ts'],
       rules: {
-        "sort-imports": [
-          "error",
+        'sort-imports': [
+          'error',
           {
             ignoreCase: false,
             ignoreDeclarationSort: false,
             ignoreMemberSort: false,
-            memberSyntaxSortOrder: ["none", "all", "multiple", "single"],
+            memberSyntaxSortOrder: ['none', 'all', 'multiple', 'single'],
             allowSeparatedGroups: false,
           },
         ],
       },
     },
   ],
-};
+}

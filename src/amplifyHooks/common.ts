@@ -1,8 +1,8 @@
 export const DEFAULT_QUERY_FILTER = {
   filter: {
     _deleted: {
-      ne: true
-    }
+      ne: true,
+    },
   },
-  limit: 2000
+  limit: 2000,
 }

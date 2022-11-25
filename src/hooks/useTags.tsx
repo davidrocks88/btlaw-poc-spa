@@ -1,8 +1,6 @@
-import {
-  useQuery
-} from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 import { BASE_URL } from '../common'
-import _ from "lodash"
+import _ from 'lodash'
 
 export function useTags() {
   // @ts-ignore
@@ -12,11 +10,13 @@ export function useTags() {
     return json
   })
 
-  const filtered = data?.filter(s => s.length > 0)
-  const sorted = filtered?.sort((t1: string, t2: string) => t1.trim().toLocaleLowerCase().localeCompare(t2.trim().toLocaleLowerCase()))
+  const filtered = data?.filter((s) => s.length > 0)
+  const sorted = filtered?.sort((t1: string, t2: string) =>
+    t1.trim().toLocaleLowerCase().localeCompare(t2.trim().toLocaleLowerCase()),
+  )
   const tags = _.uniq(sorted)
 
   return {
-    tags
+    tags,
   }
 }

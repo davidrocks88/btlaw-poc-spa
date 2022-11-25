@@ -40,6 +40,10 @@ export function Organization({ organizationID }: OrganizationProps) {
   if (!organization) {
     return <></>
   }
+
+  const volunteerUrlLink = organization.volunteerUrl
+    ? organization.volunteerUrl
+    : `mailto:${organization.volunteerContactEmail}`
   return (
     <div
       className='w-96 m-4 p-4 flex flex-col rounded overflow-hidden shadow-lg'
@@ -84,14 +88,7 @@ export function Organization({ organizationID }: OrganizationProps) {
             />
           </a>
         )}
-        <a
-          href={`${organization.volunteerUrl
-              ? organization.volunteerUrl
-              : `mailto:${organization.volunteerContactEmail}`
-            }`}
-          target='_blank'
-          rel='noreferrer'
-        >
+        <a href={volunteerUrlLink} target='_blank' rel='noreferrer'>
           <button className='w-42 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>
             Volunteer Now
           </button>

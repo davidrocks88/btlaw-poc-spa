@@ -9,6 +9,7 @@ import { OrgEditor, Migration } from './components'
 import awsExports from './aws-exports'
 import { Amplify } from 'aws-amplify'
 import { Test } from './Test'
+import AuthTest from './components/AuthTest'
 
 Amplify.configure(awsExports)
 
@@ -68,6 +69,7 @@ root.render(
               <Route path='newOrg/:id' element={<OrgEditor />} />
               <Route path='migration' element={<Migration />} />
               <Route path='test' element={<Test />} />
+              <Route path='auth' element={<AuthTest />} />
             </Route>
           </Routes>
         </div>

@@ -14,6 +14,9 @@
     "categories": {
       "api": {
         "BTLawProBono": {}
+      },
+      "auth": {
+        "btlawprobonofc543626": {}
       }
     }
   }

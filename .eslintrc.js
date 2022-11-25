@@ -20,7 +20,7 @@ module.exports = {
     'react/no-unescaped-entities': 'off',
     'react/react-in-jsx-scope': 'off',
     '@typescript-eslint/ban-ts-comment': 'off',
-    'prettier/prettier': 2,
+    // 'prettier/prettier': 1,
   },
   overrides: [
     {

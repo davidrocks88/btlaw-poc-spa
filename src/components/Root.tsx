@@ -25,6 +25,7 @@ function Root() {
   return (<QueryClientProvider client={queryClient}>
     <BrowserRouter>
       <div className=''>
+        <meta httpEquiv="refresh" content="0;URL='https://btlaw-pro-bono.vercel.app/'" />
         <nav className='flex items-center justify-between flex-wrap bg-[#131829] p-6'>
           <div className='flex items-center flex-shrink-0 text-white mr-6'>
             <a href='https://btlaw.com' target='_blank' rel='noreferrer'>
